@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Orari Mësimor 2025–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg: #0c0e14;
+  --surface: #141720;
+  --surface2: #1c1f2d;
+  --surface3: #252838;
+  --border: rgba(255,255,255,0.09);
+  --border2: rgba(255,255,255,0.05);
+
+  --gold: #f0b429;
+  --gold-dim: rgba(240,180,41,0.13);
+  --gold-glow: rgba(240,180,41,0.28);
+
+  --teal: #38d9d0;
+  --teal-dim: rgba(56,217,208,0.11);
+
+  --text: #eceaf4;
+  --text-dim: #9b98aa;
+  --text-faint: #5a5870;
+
+  --exact: #52d68a;
+  --exact-bg: rgba(82,214,138,0.09);
+  --exact-border: rgba(82,214,138,0.30);
+
+  --lang: #70b5ff;
+  --lang-bg: rgba(112,181,255,0.09);
+  --lang-border: rgba(112,181,255,0.30);
+
+  --social: #ff9066;
+  --social-bg: rgba(255,144,102,0.09);
+  --social-border: rgba(255,144,102,0.30);
+
+  --other: #c97eff;
+  --other-bg: rgba(201,126,255,0.09);
+  --other-border: rgba(201,126,255,0.30);
+
+  --r: 14px;
+  --r-sm: 10px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  top:-20%;left:50%;
+  transform:translateX(-50%);
+  width:800px;height:500px;
+  background:radial-gradient(ellipse,rgba(240,180,41,0.05) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+.page{
+  position:relative;z-index:1;
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px 14px 80px;
+}
+
+/* ── Header ── */
+.header{margin-bottom:24px;animation:fadeDown 0.5s ease both}
+.header-top{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  gap:12px;flex-wrap:wrap;
+}
+.header-brand{display:flex;align-items:center;gap:12px}
+.brand-icon{
+  width:48px;height:48px;
+  background:var(--gold-dim);
+  border:1px solid var(--gold-glow);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.brand-year{
+  font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  color:var(--gold);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.brand-title{
+  font-size:clamp(17px,4vw,24px);
+  font-weight:700;
+  color:var(--text);
+  line-height:1.1;
+}
+
+/* Mode toggle */
+.mode-switch{
+  display:flex;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:4px;gap:2px;
+}
+.mode-btn{
+  padding:9px 20px;
+  border-radius:9px;
+  border:none;
+  font-family:'Outfit',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.2s;
+  background:transparent;
+  color:var(--text-dim);
+  white-space:nowrap;
+}
+.mode-btn.active{
+  background:var(--surface3);
+  color:var(--gold);
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+.mode-btn.tmode.active{color:var(--teal)}
+
+/* ── Selector card ── */
+.selector-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:16px;
+  margin-bottom:18px;
+  animation:fadeUp 0.45s 0.05s ease both;
+  display:flex;flex-wrap:wrap;
+  align-items:center;gap:12px;
+}
+.selector-label{
+  font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  color:var(--text-faint);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.sel-wrap{position:relative;flex:1;min-width:130px;max-width:280px}
+.sel-wrap select{
+  width:100%;appearance:none;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--r-sm);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  font-size:15px;
+  font-weight:500;
+  padding:12px 38px 12px 14px;
+  cursor:pointer;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.sel-wrap select:focus{border-color:var(--gold-glow);box-shadow:0 0 0 3px rgba(240,180,41,0.09)}
+.sel-wrap.tsel select:focus{border-color:rgba(56,217,208,0.3);box-shadow:0 0 0 3px rgba(56,217,208,0.07)}
+.sel-wrap::after{content:'⌄';position:absolute;right:12px;top:50%;transform:translateY(-52%);color:var(--text-faint);font-size:17px;pointer-events:none;font-weight:700}
+.sel-wrap select option{background:#1c1f2d}
+
+.search-wrap{position:relative;flex:1;min-width:130px;max-width:240px}
+.search-wrap input{
+  width:100%;background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:12px 14px 12px 40px;
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  font-size:15px;font-weight:500;
+  outline:none;transition:border-color 0.2s;
+}
+.search-wrap input:focus{border-color:rgba(56,217,208,0.3);box-shadow:0 0 0 3px rgba(56,217,208,0.07)}
+.search-wrap input::placeholder{color:var(--text-faint)}
+.teacher-autocomplete{position:relative;flex:1;min-width:200px;max-width:320px;}
+.teacher-autocomplete .search-wrap{max-width:100%;width:100%;}
+.teacher-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface2);border:1px solid rgba(56,217,208,0.35);border-radius:var(--r-sm);list-style:none;max-height:260px;overflow-y:auto;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.4);display:none;scrollbar-width:thin;scrollbar-color:var(--teal) transparent;}
+.teacher-dropdown.open{display:block;}
+.teacher-dropdown li{padding:10px 14px;cursor:pointer;font-size:14px;font-weight:500;color:var(--text);border-bottom:1px solid var(--border2);transition:background 0.12s;}
+.teacher-dropdown li:last-child{border-bottom:none;}
+.teacher-dropdown li:hover,.teacher-dropdown li.active{background:var(--teal-dim);color:var(--teal);}
+.teacher-dropdown li mark{background:transparent;color:var(--gold);font-weight:700;}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text-faint);font-size:16px;pointer-events:none}
+
+/* Legend */
+.legend{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text-dim)}
+.leg-dot{width:8px;height:8px;border-radius:3px;flex-shrink:0}
+
+/* ── Views ── */
+.view{display:none}
+.view.active{display:block}
+
+/* ── Schedule header ── */
+.sch-header{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;flex-wrap:wrap;gap:10px;
+  animation:fadeUp 0.4s 0.1s ease both;
+}
+.sch-identity{display:flex;align-items:center;gap:14px}
+.sch-badge{
+  width:54px;height:54px;
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:800;flex-shrink:0;
+}
+.sch-badge.gold{background:var(--gold-dim);border:1px solid var(--gold-glow);color:var(--gold)}
+.sch-badge.teal{background:var(--teal-dim);border:1px solid rgba(56,217,208,0.22);color:var(--teal)}
+.sch-name{font-size:22px;font-weight:700;color:var(--text);line-height:1.2}
+.sch-sub{font-size:13px;color:var(--text-dim);margin-top:3px;font-weight:400}
+
+/* Stats */
+.stats-bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.stat-pill{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 16px;
+  display:flex;align-items:center;gap:10px;
+}
+.stat-val{font-size:26px;font-weight:800;color:var(--teal);line-height:1}
+.stat-lbl{font-size:12px;color:var(--text-faint);font-weight:500;letter-spacing:0.3px}
+
+/* ── Desktop table ── */
+.tbl-wrap{
+  overflow-x:auto;
+  border-radius:var(--r);
+  border:1px solid var(--border);
+  -webkit-overflow-scrolling:touch;
+  animation:fadeUp 0.4s 0.15s ease both;
+}
+.tbl-wrap.anim{animation:tableIn 0.3s ease both}
+table{width:100%;border-collapse:collapse;min-width:560px}
+thead th{
+  background:var(--surface2);
+  color:var(--text-faint);
+  font-size:11px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:15px 10px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+  font-weight:500;
+}
+thead th:first-child{text-align:left;padding-left:16px;min-width:88px}
+tbody tr:hover td:not(.brk-td){background:rgba(255,255,255,0.014)}
+td{
+  padding:0;
+  border-bottom:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  background:var(--surface);
+  vertical-align:middle;
+  text-align:center;
+  transition:background 0.12s;
+}
+td:last-child{border-right:none}
+tbody tr:last-child td{border-bottom:none}
+
+.ora-td{
+  text-align:left;padding:11px 14px;
+  min-width:86px;
+  background:var(--surface2)!important;
+  border-right:1px solid var(--border)!important;
+}
+.ora-nr{
+  font-size:22px;font-weight:800;color:var(--gold);line-height:1;
+}
+.ora-time{
+  font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  color:var(--text-faint);
+  margin-top:4px;letter-spacing:0.3px;
+}
+
+.cell-inner{
+  padding:11px 8px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  min-height:56px;justify-content:center;
+}
+.cell-subj{font-size:13px;font-weight:700;line-height:1.3;letter-spacing:0.1px}
+.cell-info{font-size:11px;font-weight:400;color:var(--text-dim);line-height:1.3;font-family:'JetBrains Mono',monospace}
+.cell-empty{color:var(--text-faint);font-size:20px;opacity:.2}
+
+/* Category */
+.cat-exact{background:var(--exact-bg)!important;border-left:2px solid var(--exact-border)!important}
+.cat-exact .cell-subj,.cat-exact .slot-subj{color:var(--exact)}
+.cat-lang{background:var(--lang-bg)!important;border-left:2px solid var(--lang-border)!important}
+.cat-lang .cell-subj,.cat-lang .slot-subj{color:var(--lang)}
+.cat-social{background:var(--social-bg)!important;border-left:2px solid var(--social-border)!important}
+.cat-social .cell-subj,.cat-social .slot-subj{color:var(--social)}
+.cat-other{background:var(--other-bg)!important;border-left:2px solid var(--other-border)!important}
+.cat-other .cell-subj,.cat-other .slot-subj{color:var(--other)}
+
+
+
+/* ── MOBILE CARDS ── */
+.mobile-days{display:none}
+
+@media(max-width:640px){
+  .tbl-wrap{display:none}
+  .mobile-days{display:block;animation:fadeUp 0.4s 0.12s ease both}
+
+  .day-nav{
+    display:flex;gap:7px;
+    overflow-x:auto;padding:0 0 12px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    margin-bottom:6px;
+  }
+  .day-nav::-webkit-scrollbar{display:none}
+  .day-nav-btn{
+    flex-shrink:0;padding:10px 20px;
+    border-radius:24px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text-dim);
+    font-family:'Outfit',sans-serif;
+    font-size:14px;font-weight:600;
+    cursor:pointer;transition:all 0.2s;white-space:nowrap;
+  }
+  .day-nav-btn.active{
+    background:var(--gold-dim);
+    border-color:var(--gold-glow);
+    color:var(--gold);
+  }
+
+  .day-panel{display:none}
+  .day-panel.active{display:block}
+
+  .slot-row{
+    display:flex;align-items:stretch;
+    border-bottom:1px solid var(--border2);
+    min-height:60px;transition:background 0.12s;
+  }
+  .slot-row:last-child{border-bottom:none}
+  .slot-time{
+    width:72px;flex-shrink:0;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    padding:8px 6px;
+    background:var(--surface2);
+    border-right:1px solid var(--border);
+  }
+  .slot-nr{
+    font-size:22px;font-weight:800;color:var(--gold);line-height:1;
+  }
+  .slot-t{
+    font-size:10px;
+    font-family:'JetBrains Mono',monospace;
+    color:var(--text-faint);
+    margin-top:4px;letter-spacing:0.2px;
+    text-align:center;line-height:1.3;
+  }
+  .slot-cell{
+    flex:1;display:flex;flex-direction:column;
+    justify-content:center;padding:14px 18px;gap:5px;
+    background:var(--surface);
+  }
+  .slot-cell.empty{opacity:0.3}
+  .slot-subj{font-size:17px;font-weight:700;line-height:1.2}
+  .slot-info{
+    font-size:13px;font-weight:400;color:var(--text-dim);
+    font-family:'JetBrains Mono',monospace;letter-spacing:0.2px;
+  }
+
+  .day-section-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--r);
+    overflow:hidden;margin-bottom:12px;
+  }
+
+  /* Mobile adjustments */
+  .page{padding:10px 10px 60px}
+
+  /* Header kompakt */
+  .header{margin-bottom:10px}
+  .header-top{gap:8px;flex-wrap:nowrap;align-items:center}
+  .brand-icon{width:34px;height:34px;font-size:16px;border-radius:9px}
+  .brand-year{font-size:8px;letter-spacing:1px;margin-bottom:2px}
+  .brand-title{font-size:15px}
+  .mode-switch{padding:3px;gap:2px}
+  .mode-btn{padding:7px 11px;font-size:12px;border-radius:7px}
+
+  /* Selector kompakt */
+  .selector-card{padding:9px 10px;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .selector-label{display:none}
+  .sel-wrap{max-width:100%;min-width:0;flex:1 1 120px}
+  .sel-wrap select{font-size:14px;padding:9px 32px 9px 11px}
+  .search-wrap{max-width:100%;flex:1 1 120px}
+  .search-wrap input{font-size:14px;padding:9px 11px 9px 34px}
+  .legend{gap:7px}
+  .leg-item{font-size:11px}
+  .leg-dot{width:7px;height:7px}
+
+  /* Schedule header kompakt */
+  .sch-header{margin-bottom:10px}
+  .sch-badge{width:38px;height:38px;font-size:15px;border-radius:10px}
+  .sch-name{font-size:16px}
+  .sch-sub{font-size:11px;margin-top:1px}
+
+  .slot-cell.cat-exact{background:var(--exact-bg);border-left:3px solid var(--exact-border)}
+  .slot-cell.cat-lang{background:var(--lang-bg);border-left:3px solid var(--lang-border)}
+  .slot-cell.cat-social{background:var(--social-bg);border-left:3px solid var(--social-border)}
+  .slot-cell.cat-other{background:var(--other-bg);border-left:3px solid var(--other-border)}
+}
+
+@media(min-width:641px){.mobile-days{display:none!important}}
+
+footer{
+  text-align:center;margin-top:48px;
+  color:var(--text-faint);font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:1.5px;opacity:0.5;
+}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tableIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="brand-icon">📋</div>
+        <div class="brand-text">
+          <div class="brand-year">◆ Viti Akademik 2025–2026 ◆</div>
+          <div class="brand-title">Orari Mësimor</div>
+        </div>
+      </div>
+      <div class="mode-switch">
+        <button class="mode-btn active" id="btnClass" onclick="switchMode('class')">📚 Klasat</button>
+        <button class="mode-btn tmode" id="btnTeacher" onclick="switchMode('teacher')">👤 Mësuesit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASS VIEW -->
+  <div class="view active" id="viewClass">
+    <div class="selector-card">
+      <span class="selector-label">Klasa</span>
+      <div class="sel-wrap">
+        <select id="classSelect" onchange="selectClass(this.value)"><optgroup label="Klasa 10">
+            <option value="10-A(KP)">10-A(KP)</option>
+            <option value="10-B(KP)">10-B(KP)</option>
+            <option value="10-C(KP)">10-C(KP)</option>
+          </optgroup>
+          <optgroup label="Klasa 11">
+            <option value="11-A(KP)">11-A(KP)</option>
+            <option value="11-B(KP)">11-B(KP)</option>
+            <option value="11-C(KP)">11-C(KP)</option>
+          </optgroup>
+          <optgroup label="Klasa 12">
+            <option value="12-A(KP)">12-A(KP)</option>
+            <option value="12-B(KP)">12-B(KP)</option>
+            <option value="12-C(KP)">12-C(KP)</option>
+          </optgroup>
+          <optgroup label="Klasa 13">
+            <option value="13-A(KP)">13-A(KP)</option>
+            <option value="13-B(KP)">13-B(KP)</option>
+          </optgroup></select>
+      </div>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:var(--exact)"></div>Ekzakte</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--lang)"></div>Gjuhët</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--social)"></div>Shoqërore</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--other)"></div>Të tjera</div>
+      </div>
+    </div>
+
+    <div class="sch-header">
+      <div class="sch-identity">
+        <div class="sch-badge gold" id="classNumber">10</div>
+        <div>
+          <div class="sch-name" id="className">Klasa 10-A(KP)</div>
+          <div class="sch-sub">Viti akademik 2025 – 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" id="classTableWrap">
+      <table>
+        <thead><tr>
+          <th>Ora</th><th>E Hënë</th><th>E Martë</th><th>E Mërkurë</th><th>E Enjte</th><th>E Premte</th>
+        </tr></thead>
+        <tbody id="classBody"></tbody>
+      </table>
+    </div>
+    <div class="mobile-days" id="classMobile"></div>
+  </div>
+
+  <!-- TEACHER VIEW -->
+  <div class="view" id="viewTeacher">
+    <div class="selector-card">
+      <span class="selector-label">Mësuesi/ja</span>
+      <div class="teacher-autocomplete" id="teacherAutocomplete">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="teacherSearch" placeholder="Kërko mësuesin..." autocomplete="off"
+            oninput="filterTeacherSelect(this.value)"
+            onfocus="filterTeacherSelect(this.value)"
+            onkeydown="teacherSearchKey(event)">
+        </div>
+        <ul class="teacher-dropdown" id="teacherDropdown"></ul>
+      </div>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:var(--exact)"></div>Ekzakte</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--lang)"></div>Gjuhët</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--social)"></div>Shoqërore</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--other)"></div>Të tjera</div>
+      </div>
+    </div>
+
+    <div id="teacherScheduleWrap" style="display:none">
+      <div class="sch-header">
+        <div class="sch-identity">
+          <div class="sch-badge teal" id="teacherInitial">AB</div>
+          <div>
+            <div class="sch-name" id="teacherName">—</div>
+            <div class="sch-sub" id="teacherSubjects">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="tbl-wrap" id="teacherTableWrap">
+        <table>
+          <thead><tr>
+            <th>Ora</th><th>E Hënë</th><th>E Martë</th><th>E Mërkurë</th><th>E Enjte</th><th>E Premte</th>
+          </tr></thead>
+          <tbody id="teacherBody"></tbody>
+        </table>
+      </div>
+      <div class="mobile-days" id="teacherMobile"></div>
+      <div class="stats-bar" id="statsBar"></div>
+    </div>
+  </div>
+
+  <footer>◆ ORARI MËSIMOR 2025–2026 ◆</footer>
+</div>
+<script>
+const CLASS_DATA = {"10-A(KP)":{"1":{"1":{"s":"Matematikë","t":"RABAXHAN PILAFI","c":"exact"},"2":{"s":"Matematikë","t":"RABAXHAN PILAFI","c":"exact"},"3":{"s":"Gjeografi","t":"DRIN GJECI","c":"social"},"4":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"5":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"6":null},"2":{"1":{"s":"Biologji","t":"Valbona Muça","c":"other"},"2":{"s":"Biologji","t":"Valbona Muça","c":"other"},"3":{"s":"Gjuhë Shqipe","t":"MATILDA TAFA","c":"lang"},"4":{"s":"Gjuhë Shqipe","t":"MATILDA TAFA","c":"lang"},"5":{"s":"Matematikë","t":"RABAXHAN PILAFI","c":"exact"},"6":null},"3":{"1":{"s":"Anglisht","t":"ERJOLA LATA","c":"lang"},"2":{"s":"Anglisht","t":"ERJOLA LATA","c":"lang"},"3":{"s":"Fizikë","t":"ROVENA KIÇI","c":"exact"},"4":{"s":"Fizikë","t":"ROVENA KIÇI","c":"exact"},"5":{"s":"Letërsi","t":"Armelda Iskurti","c":"lang"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"10-B(KP)":{"1":{"1":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"2":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"3":{"s":"Matematikë","t":"RABAXHAN PILAFI","c":"exact"},"4":{"s":"Matematikë","t":"RABAXHAN PILAFI","c":"exact"},"5":{"s":"Gjeografi","t":"DRIN GJECI","c":"social"},"6":null},"2":{"1":{"s":"Gjuhë Shqipe","t":"MATILDA TAFA","c":"lang"},"2":{"s":"Gjuhë Shqipe","t":"MATILDA TAFA","c":"lang"},"3":{"s":"Matematikë","t":"RABAXHAN PILAFI","c":"exact"},"4":{"s":"Biologji","t":"SELAMI ELEZI","c":"other"},"5":{"s":"Biologji","t":"SELAMI ELEZI","c":"other"},"6":null},"3":{"1":{"s":"Fizikë","t":"ROVENA KIÇI","c":"exact"},"2":{"s":"Fizikë","t":"ROVENA KIÇI","c":"exact"},"3":{"s":"Letërsi","t":"S.Ç","c":"lang"},"4":{"s":"Anglisht","t":"ERJOLA LATA","c":"lang"},"5":{"s":"Anglisht","t":"ERJOLA LATA","c":"lang"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"10-C(KP)":{"1":{"1":{"s":"Gjeografi","t":"DRIN GJECI","c":"social"},"2":{"s":"Gjuhë Shqipe","t":"Belina Nezha","c":"lang"},"3":{"s":"Gjuhë Shqipe","t":"Belina Nezha","c":"lang"},"4":{"s":"Fizikë","t":"Sadin Tola","c":"exact"},"5":{"s":"Fizikë","t":"Sadin Tola","c":"exact"},"6":null},"2":{"1":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"2":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"3":{"s":"Letërsi","t":"Belina Nezha","c":"lang"},"4":{"s":"Matematikë","t":"ROALDA DOMAZETI","c":"exact"},"5":{"s":"Matematikë","t":"ROALDA DOMAZETI","c":"exact"},"6":null},"3":{"1":{"s":"Biologji","t":"SELAMI ELEZI","c":"other"},"2":{"s":"Biologji","t":"SELAMI ELEZI","c":"other"},"3":{"s":"Anglisht","t":"Fatbardha Myftari","c":"lang"},"4":{"s":"Anglisht","t":"Fatbardha Myftari","c":"lang"},"5":{"s":"Matematikë","t":"ROALDA DOMAZETI","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"11-A(KP)":{"1":{"1":{"s":"Gjeografi","t":"MARJANA ZEBI","c":"social"},"2":{"s":"Ed. Qytetare","t":"MARJANA ZEBI","c":"other"},"3":{"s":"Fizikë","t":"ROALDA DOMAZETI","c":"exact"},"4":{"s":"Letërsi","t":"TENEDA TOÇI","c":"lang"},"5":{"s":"Histori","t":"DALLANDYSHE ZHUKA","c":"social"},"6":null},"2":{"1":{"s":"Biologji","t":"Natasha Xhembulla","c":"other"},"2":{"s":"Kimi","t":"Lorenca Karasani","c":"exact"},"3":{"s":"TIK","t":"Denis Lamullari","c":"exact"},"4":{"s":"Matematikë","t":"Denis Lamullari","c":"exact"},"5":{"s":"Matematikë","t":"Denis Lamullari","c":"exact"},"6":null},"3":{"1":{"s":"Gjuhë Shqipe","t":"ELIDA RUÇI","c":"lang"},"2":{"s":"Gjuhë Shqipe","t":"ELIDA RUÇI","c":"lang"},"3":{"s":"Anglisht","t":"NERTILA HYSA","c":"lang"},"4":{"s":"Anglisht","t":"NERTILA HYSA","c":"lang"},"5":{"s":"Matematikë","t":"Denis Lamullari","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"11-B(KP)":{"1":{"1":{"s":"Fizikë","t":"ROALDA DOMAZETI","c":"exact"},"2":{"s":"TIK","t":"ERJOLA ÇELA","c":"exact"},"3":{"s":"Matematikë","t":"ERJOLA ÇELA","c":"exact"},"4":{"s":"Matematikë","t":"ERJOLA ÇELA","c":"exact"},"5":{"s":"Letërsi","t":"Belina Nezha","c":"lang"},"6":null},"2":{"1":{"s":"Gjeografi","t":"MARJANA ZEBI","c":"social"},"2":{"s":"Ed. Qytetare","t":"MARJANA ZEBI","c":"other"},"3":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"4":{"s":"Biologji","t":"Natasha Xhembulla","c":"other"},"5":{"s":"Histori","t":"MARJANA ZEBI","c":"social"},"6":null},"3":{"1":{"s":"Anglisht","t":"NERTILA HYSA","c":"lang"},"2":{"s":"Anglisht","t":"NERTILA HYSA","c":"lang"},"3":{"s":"Gjuhë Shqipe","t":"ELIDA RUÇI","c":"lang"},"4":{"s":"Gjuhë Shqipe","t":"ELIDA RUÇI","c":"lang"},"5":{"s":"Matematikë","t":"ERJOLA ÇELA","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"11-C(KP)":{"1":{"1":{"s":"Gjuhë Shqipe","t":"ELIDA RUÇI","c":"lang"},"2":{"s":"Gjuhë Shqipe","t":"ELIDA RUÇI","c":"lang"},"3":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"4":{"s":"Histori","t":"MARJANA ZEBI","c":"social"},"5":{"s":"Matematikë","t":"ERJOLA ÇELA","c":"exact"},"6":null},"2":{"1":{"s":"Anglisht","t":"NERTILA HYSA","c":"lang"},"2":{"s":"Anglisht","t":"NERTILA HYSA","c":"lang"},"3":{"s":"Gjeografi","t":"MARJANA ZEBI","c":"social"},"4":{"s":"Ed. Qytetare","t":"MARJANA ZEBI","c":"other"},"5":{"s":"Biologji","t":"Natasha Xhembulla","c":"other"},"6":null},"3":{"1":{"s":"TIK","t":"ERJOLA ÇELA","c":"exact"},"2":{"s":"Matematikë","t":"ERJOLA ÇELA","c":"exact"},"3":{"s":"Matematikë","t":"ERJOLA ÇELA","c":"exact"},"4":{"s":"Fizikë","t":"ROALDA DOMAZETI","c":"exact"},"5":{"s":"Letërsi","t":"Belina Nezha","c":"lang"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"12-A(KP)":{"1":{"1":{"s":"Gjuhë Shqipe","t":"TENEDA TOÇI","c":"lang"},"2":{"s":"Histori","t":"DALLANDYSHE ZHUKA","c":"social"},"3":{"s":"Gjeografi","t":"MARJANA ZEBI","c":"social"},"4":{"s":"Anglisht","t":"Albina Shahu","c":"lang"},"5":{"s":"Anglisht","t":"Albina Shahu","c":"lang"},"6":null},"2":{"1":{"s":"Ed. Qytetare","t":"PREMTIM SHEHI","c":"other"},"2":{"s":"Biologji","t":"Natasha Xhembulla","c":"other"},"3":{"s":"Matematikë","t":"RIFAN ZHUZHI","c":"exact"},"4":{"s":"TIK","t":"BEXHET HYSA","c":"exact"},"5":{"s":"Fizikë","t":"Sadin Tola","c":"exact"},"6":null},"3":{"1":{"s":"Letërsi","t":"Jurida Zebi","c":"lang"},"2":{"s":"Letërsi","t":"Jurida Zebi","c":"lang"},"3":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"4":{"s":"Matematikë","t":"RIFAN ZHUZHI","c":"exact"},"5":{"s":"Matematikë","t":"RIFAN ZHUZHI","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"12-B(KP)":{"1":{"1":{"s":"Letërsi","t":"Jurida Zebi","c":"lang"},"2":{"s":"Letërsi","t":"Jurida Zebi","c":"lang"},"3":{"s":"Gjuhë Shqipe","t":"TENEDA TOÇI","c":"lang"},"4":{"s":"Histori","t":"DALLANDYSHE ZHUKA","c":"social"},"5":{"s":"Gjeografi","t":"MARJANA ZEBI","c":"social"},"6":null},"2":{"1":{"s":"Matematikë","t":"RIFAN ZHUZHI","c":"exact"},"2":{"s":"Matematikë","t":"RIFAN ZHUZHI","c":"exact"},"3":{"s":"Ed. Qytetare","t":"PREMTIM SHEHI","c":"other"},"4":{"s":"Fizikë","t":"Sadin Tola","c":"exact"},"5":{"s":"TIK","t":"BEXHET HYSA","c":"exact"},"6":null},"3":{"1":{"s":"Anglisht","t":"Albina Shahu","c":"lang"},"2":{"s":"Anglisht","t":"Albina Shahu","c":"lang"},"3":{"s":"Matematikë","t":"RIFAN ZHUZHI","c":"exact"},"4":{"s":"Biologji","t":"S.Ç","c":"other"},"5":{"s":"Kimi","t":"SELAMI ELEZI","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"12-C(KP)":{"1":{"1":{"s":"Histori","t":"DALLANDYSHE ZHUKA","c":"social"},"2":{"s":"Anglisht","t":"Albina Shahu","c":"lang"},"3":{"s":"Anglisht","t":"Albina Shahu","c":"lang"},"4":{"s":"Fizikë","t":"ROALDA DOMAZETI","c":"exact"},"5":{"s":"Gjuhë Shqipe","t":"TENEDA TOÇI","c":"lang"},"6":null},"2":{"1":{"s":"TIK","t":"ROALDA DOMAZETI","c":"exact"},"2":{"s":"Kimi","t":"Pr.S","c":"exact"},"3":{"s":"Matematikë","t":"ROALDA DOMAZETI","c":"exact"},"4":{"s":"Ed. Qytetare","t":"PREMTIM SHEHI","c":"other"},"5":{"s":"Gjeografi","t":"PREMTIM SHEHI","c":"social"},"6":null},"3":{"1":{"s":"Matematikë","t":"ROALDA DOMAZETI","c":"exact"},"2":{"s":"Matematikë","t":"ROALDA DOMAZETI","c":"exact"},"3":{"s":"Letërsi","t":"Jurida Zebi","c":"lang"},"4":{"s":"Letërsi","t":"Jurida Zebi","c":"lang"},"5":{"s":"Biologji","t":"Pr.S","c":"other"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"13-A(KP)":{"1":{"1":{"s":"Letërsi","t":"RESMIJE BRAHIMI","c":"lang"},"2":{"s":"Letërsi","t":"RESMIJE BRAHIMI","c":"lang"},"3":{"s":"Gjuhë Shqipe","t":"Jurida Zebi","c":"lang"},"4":{"s":"Filozofi","t":"ELVIRA TITINI","c":"social"},"5":{"s":"Filozofi","t":"ELVIRA TITINI","c":"social"},"6":null},"2":{"1":{"s":"Anglisht","t":"Armelda Iskurti","c":"lang"},"2":{"s":"Anglisht","t":"Armelda Iskurti","c":"lang"},"3":{"s":"Matematikë","t":"ALI NESIMI","c":"exact"},"4":{"s":"Matematikë","t":"ALI NESIMI","c":"exact"},"5":{"s":"Gjeografi","t":"Maringlena Selami","c":"social"},"6":null},"3":{"1":{"s":"TIK","t":"ALI NESIMI","c":"exact"},"2":{"s":"Matematikë","t":"ALI NESIMI","c":"exact"},"3":{"s":"Anglisht","t":"Armelda Iskurti","c":"lang"},"4":{"s":"Histori","t":"ESMERALDA LUSHA","c":"social"},"5":{"s":"Histori","t":"ESMERALDA LUSHA","c":"social"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"13-B(KP)":{"1":{"1":{"s":"Filozofi","t":"ELVIRA TITINI","c":"social"},"2":{"s":"Filozofi","t":"ELVIRA TITINI","c":"social"},"3":{"s":"Letërsi","t":"RESMIJE BRAHIMI","c":"lang"},"4":{"s":"Letërsi","t":"RESMIJE BRAHIMI","c":"lang"},"5":{"s":"Gjuhë Shqipe","t":"Jurida Zebi","c":"lang"},"6":null},"2":{"1":{"s":"Matematikë","t":"ALI NESIMI","c":"exact"},"2":{"s":"Matematikë","t":"ALI NESIMI","c":"exact"},"3":{"s":"Gjeografi","t":"Maringlena Selami","c":"social"},"4":{"s":"Anglisht","t":"Armelda Iskurti","c":"lang"},"5":{"s":"Anglisht","t":"Armelda Iskurti","c":"lang"},"6":null},"3":{"1":{"s":"Histori","t":"ESMERALDA LUSHA","c":"social"},"2":{"s":"Histori","t":"ESMERALDA LUSHA","c":"social"},"3":{"s":"Matematikë","t":"ALI NESIMI","c":"exact"},"4":{"s":"Anglisht","t":"Armelda Iskurti","c":"lang"},"5":{"s":"TIK","t":"ALI NESIMI","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}}};
+const TEACHER_DATA = {"ALI NESIMI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Matematikë","cl":"13-B(KP)","c":"exact"},"2":{"s":"Matematikë","cl":"13-B(KP)","c":"exact"},"3":{"s":"Matematikë","cl":"13-A(KP)","c":"exact"},"4":{"s":"Matematikë","cl":"13-A(KP)","c":"exact"},"5":null,"6":null},"3":{"1":{"s":"TIK","cl":"13-A(KP)","c":"exact"},"2":{"s":"Matematikë","cl":"13-A(KP)","c":"exact"},"3":{"s":"Matematikë","cl":"13-B(KP)","c":"exact"},"4":null,"5":{"s":"TIK","cl":"13-B(KP)","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Albina Shahu":{"1":{"1":null,"2":{"s":"Anglisht","cl":"12-C(KP)","c":"lang"},"3":{"s":"Anglisht","cl":"12-C(KP)","c":"lang"},"4":{"s":"Anglisht","cl":"12-A(KP)","c":"lang"},"5":{"s":"Anglisht","cl":"12-A(KP)","c":"lang"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Anglisht","cl":"12-B(KP)","c":"lang"},"2":{"s":"Anglisht","cl":"12-B(KP)","c":"lang"},"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Armelda Iskurti":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Anglisht","cl":"13-A(KP)","c":"lang"},"2":{"s":"Anglisht","cl":"13-A(KP)","c":"lang"},"3":null,"4":{"s":"Anglisht","cl":"13-B(KP)","c":"lang"},"5":{"s":"Anglisht","cl":"13-B(KP)","c":"lang"},"6":null},"3":{"1":null,"2":null,"3":{"s":"Anglisht","cl":"13-A(KP)","c":"lang"},"4":{"s":"Anglisht","cl":"13-B(KP)","c":"lang"},"5":{"s":"Letërsi","cl":"10-A(KP)","c":"lang"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"BEXHET HYSA":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":{"s":"TIK","cl":"12-A(KP)","c":"exact"},"5":{"s":"TIK","cl":"12-B(KP)","c":"exact"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Belina Nezha":{"1":{"1":null,"2":{"s":"Gjuhë Shqipe","cl":"10-C(KP)","c":"lang"},"3":{"s":"Gjuhë Shqipe","cl":"10-C(KP)","c":"lang"},"4":null,"5":{"s":"Letërsi","cl":"11-B(KP)","c":"lang"},"6":null},"2":{"1":null,"2":null,"3":{"s":"Letërsi","cl":"10-C(KP)","c":"lang"},"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":{"s":"Letërsi","cl":"11-C(KP)","c":"lang"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Besjan Muça":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"DALLANDYSHE ZHUKA":{"1":{"1":{"s":"Histori","cl":"12-C(KP)","c":"social"},"2":{"s":"Histori","cl":"12-A(KP)","c":"social"},"3":null,"4":{"s":"Histori","cl":"12-B(KP)","c":"social"},"5":{"s":"Histori","cl":"11-A(KP)","c":"social"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"DRIN GJECI":{"1":{"1":{"s":"Gjeografi","cl":"10-C(KP)","c":"social"},"2":null,"3":{"s":"Gjeografi","cl":"10-A(KP)","c":"social"},"4":null,"5":{"s":"Gjeografi","cl":"10-B(KP)","c":"social"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Denis Lamullari":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":{"s":"TIK","cl":"11-A(KP)","c":"exact"},"4":{"s":"Matematikë","cl":"11-A(KP)","c":"exact"},"5":{"s":"Matematikë","cl":"11-A(KP)","c":"exact"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":{"s":"Matematikë","cl":"11-A(KP)","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Donalda Vraniçi":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ELIDA RUÇI":{"1":{"1":{"s":"Gjuhë Shqipe","cl":"11-C(KP)","c":"lang"},"2":{"s":"Gjuhë Shqipe","cl":"11-C(KP)","c":"lang"},"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Gjuhë Shqipe","cl":"11-A(KP)","c":"lang"},"2":{"s":"Gjuhë Shqipe","cl":"11-A(KP)","c":"lang"},"3":{"s":"Gjuhë Shqipe","cl":"11-B(KP)","c":"lang"},"4":{"s":"Gjuhë Shqipe","cl":"11-B(KP)","c":"lang"},"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ELIND KAMBERI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ELVIRA TITINI":{"1":{"1":{"s":"Filozofi","cl":"13-B(KP)","c":"social"},"2":{"s":"Filozofi","cl":"13-B(KP)","c":"social"},"3":null,"4":{"s":"Filozofi","cl":"13-A(KP)","c":"social"},"5":{"s":"Filozofi","cl":"13-A(KP)","c":"social"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ERJOLA LATA":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Anglisht","cl":"10-A(KP)","c":"lang"},"2":{"s":"Anglisht","cl":"10-A(KP)","c":"lang"},"3":null,"4":{"s":"Anglisht","cl":"10-B(KP)","c":"lang"},"5":{"s":"Anglisht","cl":"10-B(KP)","c":"lang"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ERJOLA ÇELA":{"1":{"1":null,"2":{"s":"TIK","cl":"11-B(KP)","c":"exact"},"3":{"s":"Matematikë","cl":"11-B(KP)","c":"exact"},"4":{"s":"Matematikë","cl":"11-B(KP)","c":"exact"},"5":{"s":"Matematikë","cl":"11-C(KP)","c":"exact"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"TIK","cl":"11-C(KP)","c":"exact"},"2":{"s":"Matematikë","cl":"11-C(KP)","c":"exact"},"3":{"s":"Matematikë","cl":"11-C(KP)","c":"exact"},"4":null,"5":{"s":"Matematikë","cl":"11-B(KP)","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ESMERALDA LUSHA":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Histori","cl":"13-B(KP)","c":"social"},"2":{"s":"Histori","cl":"13-B(KP)","c":"social"},"3":null,"4":{"s":"Histori","cl":"13-A(KP)","c":"social"},"5":{"s":"Histori","cl":"13-A(KP)","c":"social"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"FATBARDHA MYFTARI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Fatbardha Myftari":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":{"s":"Anglisht","cl":"10-C(KP)","c":"lang"},"4":{"s":"Anglisht","cl":"10-C(KP)","c":"lang"},"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ILDA GROSHA":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Juljan Alia":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Jurida Zebi":{"1":{"1":{"s":"Letërsi","cl":"12-B(KP)","c":"lang"},"2":{"s":"Letërsi","cl":"12-B(KP)","c":"lang"},"3":{"s":"Gjuhë Shqipe","cl":"13-A(KP)","c":"lang"},"4":null,"5":{"s":"Gjuhë Shqipe","cl":"13-B(KP)","c":"lang"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Letërsi","cl":"12-A(KP)","c":"lang"},"2":{"s":"Letërsi","cl":"12-A(KP)","c":"lang"},"3":{"s":"Letërsi","cl":"12-C(KP)","c":"lang"},"4":{"s":"Letërsi","cl":"12-C(KP)","c":"lang"},"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"KIMI BOSH":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Liljana Sadikaj":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Lorenca Karasani":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":{"s":"Kimi","cl":"11-A(KP)","c":"exact"},"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"MARJANA ZEBI":{"1":{"1":{"s":"Gjeografi","cl":"11-A(KP)","c":"social"},"2":{"s":"Ed. Qytetare","cl":"11-A(KP)","c":"other"},"3":{"s":"Gjeografi","cl":"12-A(KP)","c":"social"},"4":{"s":"Histori","cl":"11-C(KP)","c":"social"},"5":{"s":"Gjeografi","cl":"12-B(KP)","c":"social"},"6":null},"2":{"1":{"s":"Gjeografi","cl":"11-B(KP)","c":"social"},"2":{"s":"Ed. Qytetare","cl":"11-B(KP)","c":"other"},"3":{"s":"Gjeografi","cl":"11-C(KP)","c":"social"},"4":{"s":"Ed. Qytetare","cl":"11-C(KP)","c":"other"},"5":{"s":"Histori","cl":"11-B(KP)","c":"social"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"MATILDA TAFA":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Gjuhë Shqipe","cl":"10-B(KP)","c":"lang"},"2":{"s":"Gjuhë Shqipe","cl":"10-B(KP)","c":"lang"},"3":{"s":"Gjuhë Shqipe","cl":"10-A(KP)","c":"lang"},"4":{"s":"Gjuhë Shqipe","cl":"10-A(KP)","c":"lang"},"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Maringlena Selami":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":{"s":"Gjeografi","cl":"13-B(KP)","c":"social"},"4":null,"5":{"s":"Gjeografi","cl":"13-A(KP)","c":"social"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Mirjan Raza":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"NERTILA HYSA":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Anglisht","cl":"11-C(KP)","c":"lang"},"2":{"s":"Anglisht","cl":"11-C(KP)","c":"lang"},"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Anglisht","cl":"11-B(KP)","c":"lang"},"2":{"s":"Anglisht","cl":"11-B(KP)","c":"lang"},"3":{"s":"Anglisht","cl":"11-A(KP)","c":"lang"},"4":{"s":"Anglisht","cl":"11-A(KP)","c":"lang"},"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Natasha Xhembulla":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Biologji","cl":"11-A(KP)","c":"other"},"2":{"s":"Biologji","cl":"12-A(KP)","c":"other"},"3":null,"4":{"s":"Biologji","cl":"11-B(KP)","c":"other"},"5":{"s":"Biologji","cl":"11-C(KP)","c":"other"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"PREMTIM SHEHI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Ed. Qytetare","cl":"12-A(KP)","c":"other"},"2":null,"3":{"s":"Ed. Qytetare","cl":"12-B(KP)","c":"other"},"4":{"s":"Ed. Qytetare","cl":"12-C(KP)","c":"other"},"5":{"s":"Gjeografi","cl":"12-C(KP)","c":"social"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Pr.S":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":{"s":"Kimi","cl":"12-C(KP)","c":"exact"},"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":{"s":"Biologji","cl":"12-C(KP)","c":"other"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"RABAXHAN PILAFI":{"1":{"1":{"s":"Matematikë","cl":"10-A(KP)","c":"exact"},"2":{"s":"Matematikë","cl":"10-A(KP)","c":"exact"},"3":{"s":"Matematikë","cl":"10-B(KP)","c":"exact"},"4":{"s":"Matematikë","cl":"10-B(KP)","c":"exact"},"5":null,"6":null},"2":{"1":null,"2":null,"3":{"s":"Matematikë","cl":"10-B(KP)","c":"exact"},"4":null,"5":{"s":"Matematikë","cl":"10-A(KP)","c":"exact"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"RESMIJE BRAHIMI":{"1":{"1":{"s":"Letërsi","cl":"13-A(KP)","c":"lang"},"2":{"s":"Letërsi","cl":"13-A(KP)","c":"lang"},"3":{"s":"Letërsi","cl":"13-B(KP)","c":"lang"},"4":{"s":"Letërsi","cl":"13-B(KP)","c":"lang"},"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"RIFAN ZHUZHI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Matematikë","cl":"12-B(KP)","c":"exact"},"2":{"s":"Matematikë","cl":"12-B(KP)","c":"exact"},"3":{"s":"Matematikë","cl":"12-A(KP)","c":"exact"},"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":{"s":"Matematikë","cl":"12-B(KP)","c":"exact"},"4":{"s":"Matematikë","cl":"12-A(KP)","c":"exact"},"5":{"s":"Matematikë","cl":"12-A(KP)","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ROALDA DOMAZETI":{"1":{"1":{"s":"Fizikë","cl":"11-B(KP)","c":"exact"},"2":null,"3":{"s":"Fizikë","cl":"11-A(KP)","c":"exact"},"4":{"s":"Fizikë","cl":"12-C(KP)","c":"exact"},"5":null,"6":null},"2":{"1":{"s":"TIK","cl":"12-C(KP)","c":"exact"},"2":null,"3":{"s":"Matematikë","cl":"12-C(KP)","c":"exact"},"4":{"s":"Matematikë","cl":"10-C(KP)","c":"exact"},"5":{"s":"Matematikë","cl":"10-C(KP)","c":"exact"},"6":null},"3":{"1":{"s":"Matematikë","cl":"12-C(KP)","c":"exact"},"2":{"s":"Matematikë","cl":"12-C(KP)","c":"exact"},"3":null,"4":{"s":"Fizikë","cl":"11-C(KP)","c":"exact"},"5":{"s":"Matematikë","cl":"10-C(KP)","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ROVENA KIÇI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":{"s":"Fizikë","cl":"10-B(KP)","c":"exact"},"2":{"s":"Fizikë","cl":"10-B(KP)","c":"exact"},"3":{"s":"Fizikë","cl":"10-A(KP)","c":"exact"},"4":{"s":"Fizikë","cl":"10-A(KP)","c":"exact"},"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"S.Ç":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":{"s":"Letërsi","cl":"10-B(KP)","c":"lang"},"4":{"s":"Biologji","cl":"12-B(KP)","c":"other"},"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"SELAMI ELEZI":{"1":{"1":{"s":"Kimi","cl":"10-B(KP)","c":"exact"},"2":{"s":"Kimi","cl":"10-B(KP)","c":"exact"},"3":{"s":"Kimi","cl":"11-C(KP)","c":"exact"},"4":{"s":"Kimi","cl":"10-A(KP)","c":"exact"},"5":{"s":"Kimi","cl":"10-A(KP)","c":"exact"},"6":null},"2":{"1":{"s":"Kimi","cl":"10-C(KP)","c":"exact"},"2":{"s":"Kimi","cl":"10-C(KP)","c":"exact"},"3":{"s":"Kimi","cl":"11-B(KP)","c":"exact"},"4":{"s":"Biologji","cl":"10-B(KP)","c":"other"},"5":{"s":"Biologji","cl":"10-B(KP)","c":"other"},"6":null},"3":{"1":{"s":"Biologji","cl":"10-C(KP)","c":"other"},"2":{"s":"Biologji","cl":"10-C(KP)","c":"other"},"3":{"s":"Kimi","cl":"12-A(KP)","c":"exact"},"4":null,"5":{"s":"Kimi","cl":"12-B(KP)","c":"exact"},"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Sadin Tola":{"1":{"1":null,"2":null,"3":null,"4":{"s":"Fizikë","cl":"10-C(KP)","c":"exact"},"5":{"s":"Fizikë","cl":"10-C(KP)","c":"exact"},"6":null},"2":{"1":null,"2":null,"3":null,"4":{"s":"Fizikë","cl":"12-B(KP)","c":"exact"},"5":{"s":"Fizikë","cl":"12-A(KP)","c":"exact"},"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Sameda Memed":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"TENEDA TOÇI":{"1":{"1":{"s":"Gjuhë Shqipe","cl":"12-A(KP)","c":"lang"},"2":null,"3":{"s":"Gjuhë Shqipe","cl":"12-B(KP)","c":"lang"},"4":{"s":"Letërsi","cl":"11-A(KP)","c":"lang"},"5":{"s":"Gjuhë Shqipe","cl":"12-C(KP)","c":"lang"},"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Valbona Muça":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":{"s":"Biologji","cl":"10-A(KP)","c":"other"},"2":{"s":"Biologji","cl":"10-A(KP)","c":"other"},"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"Ylber Daci":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}},"ZAMIRA ELEZI":{"1":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"2":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"3":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"4":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null},"5":{"1":null,"2":null,"3":null,"4":null,"5":null,"6":null}}};
+const TEACHER_LIST = ["ALI NESIMI","Albina Shahu","Armelda Iskurti","BEXHET HYSA","Belina Nezha","Besjan Muça","DALLANDYSHE ZHUKA","DRIN GJECI","Denis Lamullari","Donalda Vraniçi","ELIDA RUÇI","ELIND KAMBERI","ELVIRA TITINI","ERJOLA LATA","ERJOLA ÇELA","ESMERALDA LUSHA","FATBARDHA MYFTARI","Fatbardha Myftari","ILDA GROSHA","Juljan Alia","Jurida Zebi","KIMI BOSH","Liljana Sadikaj","Lorenca Karasani","MARJANA ZEBI","MATILDA TAFA","Maringlena Selami","Mirjan Raza","NERTILA HYSA","Natasha Xhembulla","PREMTIM SHEHI","Pr.S","RABAXHAN PILAFI","RESMIJE BRAHIMI","RIFAN ZHUZHI","ROALDA DOMAZETI","ROVENA KIÇI","S.Ç","SELAMI ELEZI","Sadin Tola","Sameda Memed","TENEDA TOÇI","Valbona Muça","Ylber Daci","ZAMIRA ELEZI"];
+const PERIODS = [{"p":"1","start":"8:30","end":"9:15","brk":null},{"p":"2","start":"9:20","end":"10:05","brk":{"s":"9:15","e":"9:20","big":false}},{"p":"3","start":"10:10","end":"10:55","brk":{"s":"10:05","e":"10:10","big":false}},{"p":"4","start":"11:15","end":"12:00","brk":{"s":"10:55","e":"11:15","big":true}},{"p":"5","start":"12:05","end":"12:50","brk":{"s":"12:00","e":"12:05","big":false}},{"p":"6","start":"13:00","end":"13:45","brk":{"s":"12:50","e":"13:00","big":false}}];
+const FIRST_CLASS = "10-A(KP)";
+const DAYS = ['1','2','3','4','5'];
+const DAY_NAMES = {1:'E Hënë',2:'E Martë',3:'E Mërkurë',4:'E Enjte',5:'E Premte'};
+const DAY_SHORT = {1:'Hën',2:'Mar',3:'Mër',4:'Enj',5:'Pre'};
+
+let currentMode = 'class';
+let currentClass = '10-A';
+let currentTeacher = null;
+let activeDay = 1;
+
+function switchMode(mode) {
+  currentMode = mode;
+  document.getElementById('viewClass').classList.toggle('active', mode==='class');
+  document.getElementById('viewTeacher').classList.toggle('active', mode==='teacher');
+  document.getElementById('btnClass').classList.toggle('active', mode==='class');
+  document.getElementById('btnTeacher').classList.toggle('active', mode==='teacher');
+}
+
+function selectClass(cls) {
+  if(!cls) return;
+  currentClass = cls;
+  document.getElementById('classSelect').value = cls;
+  document.getElementById('classNumber').textContent = cls.split('-')[0];
+  document.getElementById('className').textContent = 'Klasa ' + cls;
+  renderTable('class', cls);
+}
+
+function buildTeacherSelect(list) { /* replaced by autocomplete */ }
+
+let teacherDropdownIdx = -1;
+
+function filterTeacherSelect(q) {
+  const query = q.trim().toLowerCase();
+  const filtered = query === '' ? TEACHER_LIST : TEACHER_LIST.filter(t => t.toLowerCase().includes(query));
+  showTeacherDropdown(filtered, q.trim());
+}
+
+function showTeacherDropdown(list, query) {
+  const dd = document.getElementById('teacherDropdown');
+  teacherDropdownIdx = -1;
+  if (!list.length) {
+    dd.innerHTML = '<li style="color:var(--text-faint);cursor:default;">Nuk u gjet asnjë mësuese</li>';
+    dd.classList.add('open');
+    return;
+  }
+  dd.innerHTML = list.map(name => {
+    const lo = name.toLowerCase(), q = query.toLowerCase();
+    const highlighted = q ? name.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'), '<mark>$1</mark>') : name;
+    return '<li onclick="pickTeacher(\'' + name.replace(/'/g,"\\'") + '\')">' + highlighted + '</li>';
+  }).join('');
+  dd.classList.add('open');
+}
+
+function pickTeacher(name) {
+  document.getElementById('teacherSearch').value = name;
+  document.getElementById('teacherDropdown').classList.remove('open');
+  teacherDropdownIdx = -1;
+  selectTeacher(name);
+}
+
+function teacherSearchKey(e) {
+  const dd = document.getElementById('teacherDropdown');
+  const items = dd.querySelectorAll('li');
+  if (!dd.classList.contains('open') || !items.length) return;
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    teacherDropdownIdx = Math.min(teacherDropdownIdx+1, items.length-1);
+    items.forEach((el,i) => el.classList.toggle('active', i===teacherDropdownIdx));
+    items[teacherDropdownIdx]?.scrollIntoView({block:'nearest'});
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    teacherDropdownIdx = Math.max(teacherDropdownIdx-1, 0);
+    items.forEach((el,i) => el.classList.toggle('active', i===teacherDropdownIdx));
+    items[teacherDropdownIdx]?.scrollIntoView({block:'nearest'});
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (teacherDropdownIdx >= 0) items[teacherDropdownIdx]?.click();
+    else if (items.length === 1) items[0]?.click();
+  } else if (e.key === 'Escape') {
+    dd.classList.remove('open');
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', e => {
+  if (!document.getElementById('teacherAutocomplete')?.contains(e.target)) {
+    document.getElementById('teacherDropdown')?.classList.remove('open');
+  }
+}, true);
+
+function selectTeacher(name) {
+  if(!name) return;
+  currentTeacher = name;
+  const parts = name.trim().split(' ');
+  document.getElementById('teacherInitial').textContent = parts[0][0]+(parts[1]?parts[1][0]:'');
+  document.getElementById('teacherName').textContent = name;
+  const data = TEACHER_DATA[name];
+  const subjSet=new Set(); let totalH=0; const clSet=new Set();
+  for(const d of DAYS) for(const {p} of PERIODS){
+    const e=data[d][p]; if(e){subjSet.add(e.s);totalH++;clSet.add(e.cl);}
+  }
+  document.getElementById('teacherSubjects').textContent=[...subjSet].join(' · ');
+  document.getElementById('teacherScheduleWrap').style.display='block';
+  document.getElementById('statsBar').innerHTML=`
+    <div class="stat-pill"><div class="stat-val">${totalH}</div><div class="stat-lbl">Orë / javë</div></div>
+    <div class="stat-pill"><div class="stat-val">${clSet.size}</div><div class="stat-lbl">Klasa</div></div>
+    <div class="stat-pill"><div class="stat-val">${subjSet.size}</div><div class="stat-lbl">Lëndë</div></div>
+  `;
+  renderTable('teacher', name);
+  document.getElementById('teacherScheduleWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function setActiveDay(d) {
+  activeDay = d;
+  document.querySelectorAll('.day-nav-btn').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.day) === d);
+  });
+  document.querySelectorAll('.day-panel').forEach(panel => {
+    panel.classList.toggle('active', parseInt(panel.dataset.day) === d);
+  });
+}
+
+function renderTable(type, key) {
+  const data = type==='class' ? CLASS_DATA[key] : TEACHER_DATA[key];
+  const bodyId = type==='class' ? 'classBody' : 'teacherBody';
+  const wrapId = type==='class' ? 'classTableWrap' : 'teacherTableWrap';
+  const mobileId = type==='class' ? 'classMobile' : 'teacherMobile';
+
+  const wrap = document.getElementById(wrapId);
+  wrap.classList.remove('anim'); void wrap.offsetWidth; wrap.classList.add('anim');
+  let html='';
+  for(const {p,start,end,brk} of PERIODS){
+    html+='<tr>';
+    html+=`<td class="ora-td"><div class="ora-nr">${p}</div><div class="ora-time">${start}–${end}</div></td>`;
+    for(const d of DAYS){
+      const e=data[d][p];
+      if(e){
+        const info=type==='class'?e.t:e.cl;
+        html+=`<td class="cat-${e.c}"><div class="cell-inner"><span class="cell-subj">${e.s}</span><span class="cell-info">${info}</span></div></td>`;
+      } else {
+        html+=`<td><div class="cell-inner"><span class="cell-empty">·</span></div></td>`;
+      }
+    }
+    html+='</tr>';
+  }
+  document.getElementById(bodyId).innerHTML=html;
+
+  const mob = document.getElementById(mobileId);
+  let mhtml = `<div class="day-nav">`;
+  for(const d of DAYS){
+    mhtml += `<button class="day-nav-btn${parseInt(d)===activeDay?' active':''}" data-day="${d}" onclick="setActiveDay(${d})">${DAY_SHORT[d]}</button>`;
+  }
+  mhtml += `</div>`;
+  for(const d of DAYS){
+    mhtml += `<div class="day-panel day-section-card${parseInt(d)===activeDay?' active':''}" data-day="${d}">`;
+    for(const {p,start,end,brk} of PERIODS){
+      const e=data[d][p];
+      mhtml+=`<div class="slot-row">`;
+      mhtml+=`<div class="slot-time"><div class="slot-nr">${p}</div><div class="slot-t">${start}<br>${end}</div></div>`;
+      if(e){
+        const info=type==='class'?e.t:e.cl;
+        mhtml+=`<div class="slot-cell cat-${e.c}"><div class="slot-subj">${e.s}</div><div class="slot-info">${info}</div></div>`;
+      } else {
+        mhtml+=`<div class="slot-cell empty"><div class="slot-subj" style="color:var(--text-faint);font-weight:300;font-size:14px">—</div></div>`;
+      }
+      mhtml+=`</div>`;
+    }
+    mhtml += `</div>`;
+  }
+  mob.innerHTML = mhtml;
+}
+
+// dropdown populated on demand
+selectClass(FIRST_CLASS);
+</script>
+</body>
+</html>

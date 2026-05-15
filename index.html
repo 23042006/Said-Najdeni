@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gjimnazi "Said Najdeni" — Peshkopi</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- jsPDF për gjenerimin e PDF në browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    /* ── ORARI SELECTOR MODAL ── */
+    #orari-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    #orari-modal-overlay.open { display: flex; }
+    #orari-selector {
+      background: #141720;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      width: min(460px, 92vw);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      animation: modalIn 0.28s ease both;
+      text-align: center;
+      position: relative;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform: scale(0.93) translateY(12px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+    .orari-sel-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none;
+      color: #9b98aa; font-size: 20px; cursor: pointer;
+      line-height: 1; padding: 4px 8px; border-radius: 8px;
+      transition: color 0.2s;
+    }
+    .orari-sel-close:hover { color: #fff; }
+    .orari-sel-icon { font-size: 36px; margin-bottom: 12px; }
+    .orari-sel-title {
+      font-size: 22px; font-weight: 700;
+      color: #eceaf4; margin-bottom: 6px;
+    }
+    .orari-sel-sub {
+      font-size: 13px; color: #9b98aa; margin-bottom: 28px;
+    }
+    .orari-sel-btns { display: flex; flex-direction: column; gap: 14px; }
+    .orari-sel-btn {
+      display: flex; align-items: center; gap: 16px;
+      background: #1c1f2d;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px;
+      padding: 18px 20px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #eceaf4;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      text-align: left;
+    }
+    .orari-sel-btn:hover {
+      border-color: rgba(240,180,41,0.5);
+      background: #252838;
+      transform: translateY(-2px);
+    }
+    .orari-sel-btn-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .orari-sel-btn-icon.kp  { background: rgba(240,180,41,0.13); border: 1px solid rgba(240,180,41,0.3); }
+    .orari-sel-btn-icon.dita { background: rgba(56,217,208,0.11); border: 1px solid rgba(56,217,208,0.3); }
+    .orari-sel-btn-label { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+    .orari-sel-btn-desc  { font-size: 12px; color: #9b98aa; }
+    .orari-sel-btn-arrow { margin-left: auto; font-size: 18px; color: #5a5870; flex-shrink:0; }
+    .orari-sel-btn:hover .orari-sel-btn-arrow { color: #f0b429; }
+  </style>
+</head>
+<body>
+
+  <!-- ORARI SELECTOR MODAL -->
+  <div id="orari-modal-overlay" onclick="closeOrariModal(event)">
+    <div id="orari-selector">
+      <button class="orari-sel-close" onclick="closeOrariModalBtn()">✕</button>
+      <div class="orari-sel-icon">📅</div>
+      <div class="orari-sel-title">Orari Mësimor</div>
+      <div class="orari-sel-sub">Zgjidhni llojin e orarit që dëshironi të shikoni</div>
+      <div class="orari-sel-btns">
+        <a class="orari-sel-btn" href="orari_kp.html" target="_blank">
+          <div class="orari-sel-btn-icon kp">📋</div>
+          <div>
+            <div class="orari-sel-btn-label">Orari KP</div>
+            <div class="orari-sel-btn-desc">Orari sipas klasave dhe mësuesve</div>
+          </div>
+          <span class="orari-sel-btn-arrow">→</span>
+        </a>
+        <a class="orari-sel-btn" href="orari_dita.html" target="_blank">
+          <div class="orari-sel-btn-icon dita">🗓️</div>
+          <div>
+            <div class="orari-sel-btn-label">Orari i Ditës</div>
+            <div class="orari-sel-btn-desc">Orari i organizuar sipas ditëve të javës</div>
+          </div>
+          <span class="orari-sel-btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Seksionet ngarkohen dinamikisht nga JavaScript -->
+  <div id="app"></div>
+
+  <script>
+    // ════════════════════════════════════════════════
+    //  KONFIGURIMI I ORARIT PER PDF
+    // ════════════════════════════════════════════════
+    const ORARI_DATA = {
+      k10a: {
+        emri: 'Klasa 10 A',
+        rows: [
+          ['1\n08:00-08:45', 'Matematikë', 'Gjuhë Shqipe', 'Fizikë', 'Matematikë', 'Histori'],
+          ['', 'PUSHIM  08:45 / 09:00', '', '', '', ''],
+          ['2\n09:00-09:45', 'Gjuhë Shqipe', 'Matematikë', 'Biologji', 'Gjeografi', 'Matematikë'],
+          ['', 'PUSHIM  09:45 / 10:00', '', '', '', ''],
+          ['3\n10:00-10:45', 'Anglisht', 'Kimi', 'Gjuhë Shqipe', 'Anglisht', 'Ed. Fizike'],
+          ['', 'PUSHIM I MADH  10:45 / 11:05', '', '', '', ''],
+          ['4\n11:05-11:50', 'Kimi', 'Fizikë', 'Anglisht', 'Biologji', 'Gjuhë Shqipe'],
+          ['', 'PUSHIM  11:50 / 12:05', '', '', '', ''],
+          ['5\n12:05-12:50', 'Histori', 'Ed. Fizike', 'Matematikë', 'Kimi', 'Fizikë'],
+          ['', 'PUSHIM  12:50 / 13:05', '', '', '', ''],
+          ['6\n13:05-13:50', 'Gjeografi', 'Histori', 'Ed. Qytetare', 'Gjuhë Shqipe', 'Kimi'],
+          ['', 'PUSHIM  13:50 / 14:05', '', '', '', ''],
+          ['7\n14:05-14:50', 'Informatikë', 'Gjeografi', 'Histori', 'Informatikë', 'Biologji'],
+        ]
+      },
+      k10b: {
+        emri: 'Klasa 10 B',
+        rows: [
+          ['1\n08:00-08:45', 'Fizikë', 'Matematikë', 'Gjuhë Shqipe', 'Biologji', 'Matematikë'],
+          ['', 'PUSHIM  08:45 / 09:00', '', '', '', ''],
+          ['2\n09:00-09:45', 'Matematikë', 'Anglisht', 'Matematikë', 'Gjuhë Shqipe', 'Histori'],
+          ['', 'PUSHIM  09:45 / 10:00', '', '', '', ''],
+          ['3\n10:00-10:45', 'Gjuhë Shqipe', 'Biologji', 'Anglisht', 'Matematikë', 'Kimi'],
+          ['', 'PUSHIM I MADH  10:45 / 11:05', '', '', '', ''],
+          ['4\n11:05-11:50', 'Biologji', 'Gjuhë Shqipe', 'Fizikë', 'Anglisht', 'Gjuhë Shqipe'],
+          ['', 'PUSHIM  11:50 / 12:05', '', '', '', ''],
+          ['5\n12:05-12:50', 'Kimi', 'Fizikë', 'Biologji', 'Kimi', 'Fizikë'],
+          ['', 'PUSHIM  12:50 / 13:05', '', '', '', ''],
+          ['6\n13:05-13:50', 'Histori', 'Kimi', 'Histori', 'Ed. Fizike', 'Anglisht'],
+          ['', 'PUSHIM  13:50 / 14:05', '', '', '', ''],
+          ['7\n14:05-14:50', 'Ed. Fizike', 'Histori', 'Informatikë', 'Informatikë', 'Biologji'],
+        ]
+      },
+      k11a: {
+        emri: 'Klasa 11 A',
+        rows: [
+          ['1\n08:00-08:45', 'Matematikë', 'Fizikë', 'Kimi', 'Matematikë', 'Gjuhë Shqipe'],
+          ['', 'PUSHIM  08:45 / 09:00', '', '', '', ''],
+          ['2\n09:00-09:45', 'Gjuhë Shqipe', 'Matematikë', 'Matematikë', 'Fizikë', 'Anglisht'],
+          ['', 'PUSHIM  09:45 / 10:00', '', '', '', ''],
+          ['3\n10:00-10:45', 'Fizikë', 'Kimi', 'Biologji', 'Gjuhë Shqipe', 'Matematikë'],
+          ['', 'PUSHIM I MADH  10:45 / 11:05', '', '', '', ''],
+          ['4\n11:05-11:50', 'Kimi', 'Biologji', 'Gjuhë Shqipe', 'Anglisht', 'Fizikë'],
+          ['', 'PUSHIM  11:50 / 12:05', '', '', '', ''],
+          ['5\n12:05-12:50', 'Anglisht', 'Gjuhë Shqipe', 'Fizikë', 'Kimi', 'Biologji'],
+          ['', 'PUSHIM  12:50 / 13:05', '', '', '', ''],
+          ['6\n13:05-13:50', 'Histori', 'Anglisht', 'Histori', 'Ed. Fizike', 'Histori'],
+          ['', 'PUSHIM  13:50 / 14:05', '', '', '', ''],
+          ['7\n14:05-14:50', 'Informatikë', 'Histori', 'Anglisht', 'Informatikë', 'Ed. Fizike'],
+        ]
+      },
+      k11b: {
+        emri: 'Klasa 11 B',
+        rows: [
+          ['1\n08:00-08:45', 'Kimi', 'Gjuhë Shqipe', 'Matematikë', 'Fizikë', 'Kimi'],
+          ['', 'PUSHIM  08:45 / 09:00', '', '', '', ''],
+          ['2\n09:00-09:45', 'Biologji', 'Kimi', 'Fizikë', 'Matematikë', 'Fizikë'],
+          ['', 'PUSHIM  09:45 / 10:00', '', '', '', ''],
+          ['3\n10:00-10:45', 'Matematikë', 'Fizikë', 'Gjuhë Shqipe', 'Kimi', 'Matematikë'],
+          ['', 'PUSHIM I MADH  10:45 / 11:05', '', '', '', ''],
+          ['4\n11:05-11:50', 'Gjuhë Shqipe', 'Matematikë', 'Anglisht', 'Gjuhë Shqipe', 'Anglisht'],
+          ['', 'PUSHIM  11:50 / 12:05', '', '', '', ''],
+          ['5\n12:05-12:50', 'Anglisht', 'Biologji', 'Kimi', 'Biologji', 'Gjuhë Shqipe'],
+          ['', 'PUSHIM  12:50 / 13:05', '', '', '', ''],
+          ['6\n13:05-13:50', 'Histori', 'Anglisht', 'Biologji', 'Anglisht', 'Ed. Fizike'],
+          ['', 'PUSHIM  13:50 / 14:05', '', '', '', ''],
+          ['7\n14:05-14:50', 'Ed. Fizike', 'Histori', 'Histori', 'Informatikë', 'Informatikë'],
+        ]
+      },
+      k12a: {
+        emri: 'Klasa 12 A',
+        rows: [
+          ['1\n08:00-08:45', 'Matematikë', 'Gjuhë Shqipe', 'Matematikë', 'Kimi', 'Fizikë'],
+          ['', 'PUSHIM  08:45 / 09:00', '', '', '', ''],
+          ['2\n09:00-09:45', 'Fizikë', 'Matematikë', 'Gjuhë Shqipe', 'Matematikë', 'Matematikë'],
+          ['', 'PUSHIM  09:45 / 10:00', '', '', '', ''],
+          ['3\n10:00-10:45', 'Gjuhë Shqipe', 'Kimi', 'Fizikë', 'Gjuhë Shqipe', 'Gjuhë Shqipe'],
+          ['', 'PUSHIM I MADH  10:45 / 11:05', '', '', '', ''],
+          ['4\n11:05-11:50', 'Kimi', 'Fizikë', 'Kimi', 'Fizikë', 'Kimi'],
+          ['', 'PUSHIM  11:50 / 12:05', '', '', '', ''],
+          ['5\n12:05-12:50', 'Biologji', 'Biologji', 'Biologji', 'Anglisht', 'Anglisht'],
+          ['', 'PUSHIM  12:50 / 13:05', '', '', '', ''],
+          ['6\n13:05-13:50', 'Anglisht', 'Anglisht', 'Histori', 'Biologji', 'Filozofi'],
+          ['', 'PUSHIM  13:50 / 14:05', '', '', '', ''],
+          ['7\n14:05-14:50', 'Filozofi', 'Histori', 'Anglisht', 'Filozofi', 'Histori'],
+        ]
+      },
+      k12b: {
+        emri: 'Klasa 12 B',
+        rows: [
+          ['1\n08:00-08:45', 'Gjuhë Shqipe', 'Matematikë', 'Anglisht', 'Gjuhë Shqipe', 'Matematikë'],
+          ['', 'PUSHIM  08:45 / 09:00', '', '', '', ''],
+          ['2\n09:00-09:45', 'Matematikë', 'Gjuhë Shqipe', 'Matematikë', 'Matematikë', 'Gjuhë Shqipe'],
+          ['', 'PUSHIM  09:45 / 10:00', '', '', '', ''],
+          ['3\n10:00-10:45', 'Anglisht', 'Anglisht', 'Gjuhë Shqipe', 'Anglisht', 'Anglisht'],
+          ['', 'PUSHIM I MADH  10:45 / 11:05', '', '', '', ''],
+          ['4\n11:05-11:50', 'Fizikë', 'Fizikë', 'Fizikë', 'Kimi', 'Fizikë'],
+          ['', 'PUSHIM  11:50 / 12:05', '', '', '', ''],
+          ['5\n12:05-12:50', 'Kimi', 'Kimi', 'Kimi', 'Fizikë', 'Biologji'],
+          ['', 'PUSHIM  12:50 / 13:05', '', '', '', ''],
+          ['6\n13:05-13:50', 'Histori', 'Biologji', 'Biologji', 'Biologji', 'Histori'],
+          ['', 'PUSHIM  13:50 / 14:05', '', '', '', ''],
+          ['7\n14:05-14:50', 'Filozofi', 'Histori', 'Histori', 'Filozofi', 'Filozofi'],
+        ]
+      }
+    };
+
+    // Tab aktiv aktualisht
+    let activeTabId = 'k10a';
+
+    // ── Hap modal-in e orarit ──
+
+    // ── Mbyll modal-in (klik overlay) ──
+
+    // ── Mbyll me butonin X ──
+
+
+    // ── Ndërrimi i tab-it ──
+
+    // ════════════════════════════════════════════════
+    //  GJENERIMI I PDF PER KLASEN AKTIVE
+    // ════════════════════════════════════════════════
+
+    // ════════════════════════════════════════════════
+    //  NGARKIMI I SEKSIONEVE
+    // ════════════════════════════════════════════════
+    const sections = [
+      'navbar.html',
+      'hero.html',
+      'lajmet.html',
+      'rreth.html',
+      'drejtimet.html',
+      'orari.html',
+      'mesuesit.html',
+      'galeria.html',
+      'kontakti.html',
+      'footer.html',
+    ];
+
+    async function loadSections() {
+      const app = document.getElementById('app');
+      for (const src of sections) {
+        try {
+          const res  = await fetch(src);
+          const html = await res.text();
+          const div  = document.createElement('div');
+          div.innerHTML = html;
+          app.appendChild(div);
+        } catch (e) {
+          console.warn('Seksioni nuk u gjet:', src);
+        }
+      }
+      initScripts();
+    }
+
+    function initScripts() {
+      // ── Navbar scroll shadow ──
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+      });
+
+      // ── Gjej linkun "Orari" në navbar dhe lidhe me modal ──
+      document.querySelectorAll('a[href="#orari"], a[href*="orari"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          openOrariModal();
+        });
+      });
+
+      // ── Animacionet ──
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.lajm-card, .drejtim-card, .mesues-card, .gal-item, .value-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+      });
+    }
+
+    // ── Funksionet globale ekzistuese ──
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('open');
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const msg = document.getElementById('form-msg');
+      if (msg) {
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 4000);
+      }
+    }
+
+    function switchTab(id) {
+      document.querySelectorAll('.orari-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.orari-panel').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById('tab-' + id);
+      if (panel) panel.classList.add('active');
+      document.querySelectorAll('.orari-tab').forEach(t => {
+        if (t.getAttribute('onclick') === `switchTab('${id}')`) {
+          t.classList.add('active');
+        }
+      });
+    }
+
+    // Escape key mbyll modal-in
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeOrariModalBtn();
+    });
+
+
+    function openOrariModal() {
+      document.getElementById('orari-modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeOrariModalBtn() {
+      document.getElementById('orari-modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeOrariModal(e) {
+      if (e.target === document.getElementById('orari-modal-overlay')) closeOrariModalBtn();
+    }
+
+        loadSections();
+  </script>
+
+</body>
+</html>
