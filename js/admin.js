@@ -7,7 +7,7 @@ const STORAGE_KEY = 'saidnajdeni_data';
 
 // ── GitHub API Config ──
 // Vendosni token-in tuaj të ri këtu pasi ta keni gjeneruar
-const GH_TOKEN  = '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';
+const GH_TOKEN  = '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';
 const GH_USER   = '23042006';
 const GH_REPO   = 'Said-Najdeni';
 const GH_FILE   = 'data/content.json';
