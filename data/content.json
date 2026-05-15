@@ -1,1 +1,162 @@
-{}
+{
+  "hero": {
+    "eyebrow": "Gjimnaz Publik · Peshkopi · Shqipëri",
+    "title": "Forma<br>mendjet<br><em>e nesërmes.</em>",
+    "desc": "Gjimnazi \"Said Najdeni\" — institucion arsimor me traditë mbi 60 vjeçare. Ofrojmë arsim cilësor, mjedis bashkëkohor dhe mundësi të pakufizuara për çdo nxënës.",
+    "stat1num": "1200+",
+    "stat1label": "Nxënës aktive",
+    "stat2num": "86",
+    "stat2label": "Mësues specialist",
+    "stat3num": "98%",
+    "stat3label": "Kalueshmëria Maturës",
+    "year": "1962"
+  },
+  "lajmet": [
+    {
+      "cat": "Arritje Akademike",
+      "title": "Nxënësit tanë triumfojnë në Olimpiadën Kombëtare të Matematikës 2025",
+      "date": "15 Prill 2025"
+    },
+    {
+      "cat": "Aktivitet Kulturor",
+      "title": "Festivali i Artit dhe Kulturës — Ekspozitë e nxënësve të klasave 11–12",
+      "date": "8 Prill 2025"
+    },
+    {
+      "cat": "Bashkëpunim",
+      "title": "Marrëveshje partneriteti me Universitetin e Tiranës për praktika shkencore",
+      "date": "1 Prill 2025"
+    }
+  ],
+  "rreth": {
+    "vjet": "63",
+    "drejtim": "4",
+    "p1": "Gjimnazi \"Said Najdeni\" është një ndër shkollat me histori më të pasur në Shqipëri. Themeluar në vitin 1962, ka formuar breza të tëra intelektualësh, shkencëtarësh dhe artistësh shqiptarë.",
+    "p2": "Me mbi 1200 nxënës dhe 86 mësues të specializuar, ne ofrojmë një mjedis mësimor bashkëkohor ku çdo nxënës zhvillon potencialin e tij të plotë."
+  },
+  "drejtimet": [
+    {
+      "num": "01",
+      "title": "Shkenca Natyrore",
+      "desc": "Fizikë, Kimi, Biologji të avancuar. Laboratorë modernë dhe projekte shkencore ndërkombëtare."
+    },
+    {
+      "num": "02",
+      "title": "Shoqëror-Humanist",
+      "desc": "Histori, Gjeografi, Sociologji. Formim kritik dhe kulturë të gjerë humaniste."
+    },
+    {
+      "num": "03",
+      "title": "Teknologji & Informatikë",
+      "desc": "Programim, rrjete kompjuterike dhe dizajn dixhital. Partneritet me kompanitë tech."
+    },
+    {
+      "num": "04",
+      "title": "Ekonomi & Biznes",
+      "desc": "Ekonomi, Kontabilitet dhe Menaxhim. Simullime biznesi dhe vizita studimore."
+    },
+    {
+      "num": "05",
+      "title": "Gjuhë të Huaja",
+      "desc": "Anglisht, Frëngjisht, Gjermanisht. Çertifikime ndërkombëtare dhe shkëmbime kulturore."
+    },
+    {
+      "num": "06",
+      "title": "Art & Muzikë",
+      "desc": "Arte pamore, muzikë dhe teatër. Festivale vjetore dhe ekspozita studentore."
+    }
+  ],
+  "mesuesit": [
+    {
+      "initials": "MM",
+      "name": "Ardiana Kola",
+      "lenda": "Tik",
+      "exp": "18 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "BS",
+      "name": "Besim Shehu",
+      "lenda": "Fizikë",
+      "exp": "22 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "EH",
+      "name": "Elida Hoxha",
+      "lenda": "Informatikë",
+      "exp": "11 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "MN",
+      "name": "Mentor Ndoci",
+      "lenda": "Histori",
+      "exp": "15 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "LB",
+      "name": "Liria Brahimi",
+      "lenda": "Gjuhë Angleze",
+      "exp": "9 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "FK",
+      "name": "Fatos Kelmendi",
+      "lenda": "Kimi",
+      "exp": "20 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "DM",
+      "name": "Diana Muka",
+      "lenda": "Biologji",
+      "exp": "14 vjet eksperiencë",
+      "img": ""
+    },
+    {
+      "initials": "RZ",
+      "name": "Rezart Zeka",
+      "lenda": "Ekonomi",
+      "exp": "12 vjet eksperiencë",
+      "img": ""
+    }
+  ],
+  "galeria": [
+    {
+      "label": "Laboratori i Shkencave",
+      "color": "#1a3a2e",
+      "img": ""
+    },
+    {
+      "label": "Biblioteka",
+      "color": "#0d1b2a",
+      "img": ""
+    },
+    {
+      "label": "Salla e Arteve",
+      "color": "#2a1a0d",
+      "img": ""
+    },
+    {
+      "label": "Klasa Informatikës",
+      "color": "#1a1a2e",
+      "img": ""
+    },
+    {
+      "label": "Festivali Kulturor",
+      "color": "#1a2a1a",
+      "img": ""
+    }
+  ],
+  "kontakti": {
+    "adresa": "Rruga \"Kongresi i Dibrës\"\nPeshkopi, Shqipëri",
+    "tel1": "+355 4 222 3456",
+    "tel2": "+355 4 222 3457",
+    "email1": "snajdeni@yahoo.com",
+    "email2": "shefkicorja@gmail.com",
+    "orari": "E Hënë — E Premte\n08:00 — 16:00"
+  }
+}
