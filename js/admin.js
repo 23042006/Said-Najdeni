@@ -694,7 +694,7 @@ function buildLoginModal() {
   <div id="login-box">
     <button class="lm-x" onclick="closeLoginModal()" title="Mbyll">&#x2715;</button>
     <div class="lm-brand">
-      <div class="lm-logo-mark">SF</div>
+      <div class="lm-logo-mark">SN</div>
       <div>
         <div class="lm-logo-name">Said Najdeni</div>
         <div class="lm-logo-sub">Paneli i Administrimit</div>
