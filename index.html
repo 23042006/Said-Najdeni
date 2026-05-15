@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gjimnazi "Said Najdeni" &mdash; Peshkopi</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+  <!-- ORARI SELECTOR MODAL -->
+  <div id="orari-modal-overlay" onclick="closeOrariModal(event)">
+    <div id="orari-selector">
+      <button class="orari-sel-close" onclick="closeOrariModalBtn()">&#x2715;</button>
+      <div class="orari-sel-icon">&#x1F4C5;</div>
+      <div class="orari-sel-title">Orari Mësimor</div>
+      <div class="orari-sel-sub">Zgjidhni llojin e orarit</div>
+      <div class="orari-sel-btns">
+        <a class="orari-sel-btn" href="orari_kp.html" target="_blank">
+          <div class="orari-sel-btn-icon kp">&#x1F4CB;</div>
+          <div class="orari-sel-btn-text">
+            <div class="orari-sel-btn-label">Orari KP</div>
+            <div class="orari-sel-btn-desc">Orari sipas klasave dhe mësuesve</div>
+          </div>
+          <span class="orari-sel-btn-arrow">&#8594;</span>
+        </a>
+        <a class="orari-sel-btn" href="orari_dita.html" target="_blank">
+          <div class="orari-sel-btn-icon dita">&#x1F5D3;</div>
+          <div class="orari-sel-btn-text">
+            <div class="orari-sel-btn-label">Orari i Ditës</div>
+            <div class="orari-sel-btn-desc">Orari sipas klasave dhe mësuesve</div>
+          </div>
+          <span class="orari-sel-btn-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+<!-- =============================================
+   sections/navbar.html
+   Ndrysho lidhjet e menusë këtu
+   ============================================= -->
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-mark">SF</div>
+    <div>
+      <div class="nav-logo-text">Said Najdeni</div>
+      <div class="nav-logo-sub">Gjimnaz · Peshkopi</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#lajmet">Lajme</a></li>
+    <li><a href="#rreth">Rreth Nesh</a></li>
+    <li><a href="#drejtimet">Drejtimet</a></li>
+    <li><a href="#orari">Orari</a></li>
+    <li><a href="#mesuesit">Mësuesit</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#kontakti" class="nav-cta">Kontakti</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">&#x2715;</button>
+  <a href="#lajmet"    onclick="toggleMenu()">Lajme</a>
+  <a href="#rreth"     onclick="toggleMenu()">Rreth Nesh</a>
+  <a href="#drejtimet" onclick="toggleMenu()">Drejtimet</a>
+  <a href="#orari"     onclick="toggleMenu()">Orari</a>
+  <a href="#mesuesit"  onclick="toggleMenu()">Mësuesit</a>
+  <a href="#galeria"   onclick="toggleMenu()">Galeria</a>
+  <a href="#kontakti"  onclick="toggleMenu()">Kontakti</a>
+</div>
+
+
+<!-- =============================================
+   sections/hero.html
+   Ndrysho titullin, tekstin dhe statistikat këtu
+   ============================================= -->
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-up fade-up-1">Gjimnaz Publik · Peshkopi · Shqipëri</div>
+    <h1 class="hero-title fade-up fade-up-2">
+      Forma<br>mendjet<br><em>e nesërmes.</em>
+    </h1>
+    <p class="hero-desc fade-up fade-up-3">
+      Gjimnazi "Said Najdeni" — institucion arsimor me traditë mbi 60 vjeçare.
+      Ofrojmë arsim cilësor, mjedis bashkëkohor dhe mundësi të pakufizuara për çdo nxënës.
+    </p>
+    <div class="hero-btns fade-up fade-up-4">
+      <a href="#drejtimet" class="btn-primary">Shiko Drejtimet</a>
+      <a href="#rreth"     class="btn-outline">Mëso Më Shumë</a>
+    </div>
+    <!-- ── STATISTIKAT — ndrysho numrat këtu ── -->
+    <div class="hero-stats fade-up fade-up-5">
+      <div>
+        <div class="stat-num">1200+</div>
+        <div class="stat-label">Nxënës aktive</div>
+      </div>
+      <div>
+        <div class="stat-num">86</div>
+        <div class="stat-label">Mësues specialist</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Kalueshmëria Maturës</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paneli i djathtë dekorativ -->
+  <div class="hero-right">
+    <div class="hero-geo"></div>
+    <div class="hero-corner tl"></div>
+    <div class="hero-corner tr"></div>
+    <div class="hero-corner bl"></div>
+    <div class="hero-corner br"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-year">1962</div>   <!-- ← ndrysho vitin e themelimit -->
+      <div class="hero-badge-text">Themeluar<br>në Peshkopi</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/lajmet.html
+   SHTO ose NDRYSHO lajmet këtu lehtësisht
+   Kopjo një bllok .lajm-card për lajm të ri
+   ============================================= -->
+
+<section id="lajmet">
+  <div class="section-label">Të Fundit</div>
+  <h2 class="section-title">Lajme &amp; Ngjarje</h2>
+  <p class="section-sub">Qëndroni të informuar me aktivitetet dhe arritjet e shkollës sonë.</p>
+
+  <div class="lajmet-grid">
+
+    <!-- ── LAJMI 1 ── ndrysho tekstin, kategorinë dhe datën -->
+    <div class="lajm-card">
+      <div class="lajm-cat">Arritje Akademike</div>
+      <div class="lajm-title">Nxënësit tanë triumfojnë në Olimpiadën Kombëtare të Matematikës 2025</div>
+      <div class="lajm-line"></div>
+      <div class="lajm-date">15 Prill 2025</div>
+      <div class="lajm-num">01</div>
+    </div>
+
+    <!-- ── LAJMI 2 ── -->
+    <div class="lajm-card">
+      <div class="lajm-cat">Aktivitet Kulturor</div>
+      <div class="lajm-title">Festivali i Artit dhe Kulturës — Ekspozitë e nxënësve të klasave 11–12</div>
+      <div class="lajm-line"></div>
+      <div class="lajm-date">8 Prill 2025</div>
+      <div class="lajm-num">02</div>
+    </div>
+
+    <!-- ── LAJMI 3 ── -->
+    <div class="lajm-card">
+      <div class="lajm-cat">Bashkëpunim</div>
+      <div class="lajm-title">Marrëveshje partneriteti me Universitetin e Tiranës për praktika shkencore</div>
+      <div class="lajm-line"></div>
+      <div class="lajm-date">1 Prill 2025</div>
+      <div class="lajm-num">03</div>
+    </div>
+
+    <!-- ── SHTO LAJM TË RI — kopjo bllokun më poshtë dhe fshi këtë koment ──
+    <div class="lajm-card">
+      <div class="lajm-cat">Kategoria</div>
+      <div class="lajm-title">Titulli i lajmit të ri</div>
+      <div class="lajm-line"></div>
+      <div class="lajm-date">Data</div>
+      <div class="lajm-num">04</div>
+    </div>
+    ── -->
+
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/rreth.html
+   Ndrysho tekstin "Rreth Shkollës" dhe vlerat këtu
+   ============================================= -->
+
+<section id="rreth">
+  <div class="rreth-grid">
+
+    <!-- Paneli vizual i majtë -->
+    <div class="rreth-visual">
+      <div class="rreth-box-main">
+        <div class="rreth-inner">
+          <div class="big">63</div>   <!-- ← ndrysho numrin e viteve -->
+          <div class="small">vjet tradita</div>
+        </div>
+      </div>
+      <div class="rreth-box-accent">
+        <div class="num">4</div>      <!-- ← numri i drejtimeve -->
+        <div class="txt">Drejtim<br>mësimor</div>
+      </div>
+    </div>
+
+    <!-- Teksti i djathtë -->
+    <div class="rreth-content">
+      <div class="section-label">Historia Jonë</div>
+      <h2 class="section-title">Rreth Shkollës</h2>
+
+      <!-- ── NDRYSHO PARAGRAFËT KËTU ── -->
+      <p>Gjimnazi "Said Najdeni" është një ndër shkollat me histori më të pasur në Shqipëri.
+         Themeluar në vitin 1962, ka formuar breza të tëra intelektualësh, shkencëtarësh dhe
+         artistësh shqiptarë.</p>
+      <p>Me mbi 1200 nxënës dhe 86 mësues të specializuar, ne ofrojmë një mjedis mësimor
+         bashkëkohor ku çdo nxënës zhvillon potencialin e tij të plotë.</p>
+
+      <!-- ── VLERAT — ndrysho ose shto vlera të reja ── -->
+      <div class="rreth-values">
+        <div class="value-item">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="#1a6b5a" fill="none" stroke-width="1.5" stroke-linecap="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h4>Ekselencë Akademike</h4>
+          <p>Standarde të larta arsimore në të gjithë drejtimet</p>
+        </div>
+        <div class="value-item">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="#1a6b5a" fill="none" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h4>Inovacion</h4>
+          <p>Metoda moderne mësimdhënieje dhe teknologji bashkëkohore</p>
+        </div>
+        <div class="value-item">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="#1a6b5a" fill="none" stroke-width="1.5" stroke-linecap="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h4>Komunitet</h4>
+          <p>Mjedis gjithëpërfshirës dhe suportues për çdo nxënës</p>
+        </div>
+        <div class="value-item">
+          <div class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="#1a6b5a" fill="none" stroke-width="1.5" stroke-linecap="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h4>Vlera</h4>
+          <p>Ndershmëria, respekti dhe angazhimi si baza e karakterit</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/drejtimet.html
+   Ndrysho ose shto drejtime mësimore këtu
+   ============================================= -->
+
+<section id="drejtimet">
+  <div class="section-label">Çfarë Ofrojmë</div>
+  <h2 class="section-title">Drejtimet Mësimore</h2>
+  <p class="section-sub">Gjashtë drejtime që mbulojnë interesat dhe talentet e çdo nxënësi.</p>
+
+  <div class="drejtimet-grid">
+
+    <!-- ── DREJTIMI 1 ── -->
+    <div class="drejtim-card">
+      <div class="drejtim-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      </div>
+      <div class="drejtim-num">01 / Drejtim</div>
+      <div class="drejtim-title">Shkenca Natyrore</div>
+      <div class="drejtim-desc">Fizikë, Kimi, Biologji të avancuar. Laboratorë modernë dhe projekte shkencore ndërkombëtare.</div>
+    </div>
+
+    <!-- ── DREJTIMI 2 ── -->
+    <div class="drejtim-card">
+      <div class="drejtim-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="drejtim-num">02 / Drejtim</div>
+      <div class="drejtim-title">Shoqëror-Humanist</div>
+      <div class="drejtim-desc">Histori, Gjeografi, Sociologji. Formim kritik dhe kulturë të gjerë humaniste.</div>
+    </div>
+
+    <!-- ── DREJTIMI 3 ── -->
+    <div class="drejtim-card">
+      <div class="drejtim-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="drejtim-num">03 / Drejtim</div>
+      <div class="drejtim-title">Teknologji &amp; Informatikë</div>
+      <div class="drejtim-desc">Programim, rrjete kompjuterike dhe dizajn dixhital. Partneritet me kompanitë tech.</div>
+    </div>
+
+    <!-- ── DREJTIMI 4 ── -->
+    <div class="drejtim-card">
+      <div class="drejtim-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="drejtim-num">04 / Drejtim</div>
+      <div class="drejtim-title">Ekonomi &amp; Biznes</div>
+      <div class="drejtim-desc">Ekonomi, Kontabilitet dhe Menaxhim. Simullime biznesi dhe vizita studimore.</div>
+    </div>
+
+    <!-- ── DREJTIMI 5 ── -->
+    <div class="drejtim-card">
+      <div class="drejtim-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="drejtim-num">05 / Drejtim</div>
+      <div class="drejtim-title">Gjuhë të Huaja</div>
+      <div class="drejtim-desc">Anglisht, Frëngjisht, Gjermanisht. Çertifikime ndërkombëtare dhe shkëmbime kulturore.</div>
+    </div>
+
+    <!-- ── DREJTIMI 6 ── -->
+    <div class="drejtim-card">
+      <div class="drejtim-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      </div>
+      <div class="drejtim-num">06 / Drejtim</div>
+      <div class="drejtim-title">Art &amp; Muzikë</div>
+      <div class="drejtim-desc">Arte pamore, muzikë dhe teatër. Festivale vjetore dhe ekspozita studentore.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/mesuesit.html
+   SHTO ose NDRYSHO mësuesit këtu
+   Kopjo një .mesues-card për mësues të ri
+   ============================================= -->
+
+<section id="mesuesit">
+  <div class="section-label">Ekipi Ynë</div>
+  <h2 class="section-title">Mësuesit e Shkëlqyer</h2>
+  <p class="section-sub">Profesionistë me pasion për mësimdhënien dhe zhvillimin e çdo nxënësi.</p>
+
+  <div class="mesuesit-grid">
+
+    <!-- Format: iniciale | emër | lëndë | eksperiencë -->
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">AK</div></div>
+      <div class="mesues-name">Ardiana Kola</div>
+      <div class="mesues-lenda">Matematikë</div>
+      <div class="mesues-exp">18 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">BS</div></div>
+      <div class="mesues-name">Besim Shehu</div>
+      <div class="mesues-lenda">Fizikë</div>
+      <div class="mesues-exp">22 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">EH</div></div>
+      <div class="mesues-name">Elida Hoxha</div>
+      <div class="mesues-lenda">Informatikë</div>
+      <div class="mesues-exp">11 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">MN</div></div>
+      <div class="mesues-name">Mentor Ndoci</div>
+      <div class="mesues-lenda">Histori</div>
+      <div class="mesues-exp">15 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">LB</div></div>
+      <div class="mesues-name">Liria Brahimi</div>
+      <div class="mesues-lenda">Gjuhë Angleze</div>
+      <div class="mesues-exp">9 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">FK</div></div>
+      <div class="mesues-name">Fatos Kelmendi</div>
+      <div class="mesues-lenda">Kimi</div>
+      <div class="mesues-exp">20 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">DM</div></div>
+      <div class="mesues-name">Diana Muka</div>
+      <div class="mesues-lenda">Biologji</div>
+      <div class="mesues-exp">14 vjet eksperiencë</div>
+    </div>
+
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">RZ</div></div>
+      <div class="mesues-name">Rezart Zeka</div>
+      <div class="mesues-lenda">Ekonomi</div>
+      <div class="mesues-exp">12 vjet eksperiencë</div>
+    </div>
+
+    <!-- ── SHTO MËSUES TË RI — kopjo bllokun më poshtë dhe fshi koment ──
+    <div class="mesues-card">
+      <div class="mesues-avatar"><div class="mesues-initials">XX</div></div>
+      <div class="mesues-name">Emri Mbiemri</div>
+      <div class="mesues-lenda">Lënda</div>
+      <div class="mesues-exp">N vjet eksperiencë</div>
+    </div>
+    ── -->
+
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/galeria.html
+   Ndrysho etiketat dhe ngjyrat e galersë këtu
+   ============================================= -->
+
+<section id="galeria">
+  <div class="section-label">Jeta Shkollore</div>
+  <h2 class="section-title">Galeria</h2>
+  <p class="section-sub">Momente nga aktivitetet, laboratorët dhe jeta e gjallë e shkollës sonë.</p>
+
+  <div class="galeria-grid">
+
+    <!-- Elementi i madh (zë dy rreshta) -->
+    <div class="gal-item" style="background:#1a3a2e;">
+      <div class="gal-geo">
+        <svg width="200" height="400" viewBox="0 0 200 400">
+          <circle cx="100" cy="200" r="120" stroke="#5dcaa5" stroke-width="1" fill="none" opacity="0.3"/>
+          <circle cx="100" cy="200" r="80"  stroke="#5dcaa5" stroke-width="0.5" fill="none" opacity="0.2"/>
+          <line x1="0" y1="200" x2="200" y2="200" stroke="#5dcaa5" stroke-width="0.5" opacity="0.2"/>
+          <line x1="100" y1="0" x2="100" y2="400" stroke="#5dcaa5" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="gal-inner"><span class="gal-label">Laboratori i Shkencave</span></div>
+    </div>
+
+    <div class="gal-item" style="background:#0d1b2a;">
+      <div class="gal-geo">
+        <svg width="160" height="220" viewBox="0 0 160 220">
+          <rect x="20" y="20" width="120" height="180" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.3"/>
+          <rect x="40" y="40" width="80"  height="140" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="gal-inner"><span class="gal-label">Biblioteka</span></div>
+    </div>
+
+    <div class="gal-item" style="background:#2a1a0d;">
+      <div class="gal-geo">
+        <svg width="160" height="220" viewBox="0 0 160 220">
+          <polygon points="80,20 140,200 20,200" stroke="#ef9f27" stroke-width="1" fill="none" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="gal-inner"><span class="gal-label">Salla e Arteve</span></div>
+    </div>
+
+    <div class="gal-item" style="background:#1a1a2e;">
+      <div class="gal-geo">
+        <svg width="160" height="220" viewBox="0 0 160 220">
+          <circle cx="80" cy="110" r="60" stroke="#7f77dd" stroke-width="1" fill="none" opacity="0.3"/>
+          <line x1="80" y1="50"  x2="80"  y2="170" stroke="#7f77dd" stroke-width="0.5" opacity="0.2"/>
+          <line x1="20" y1="110" x2="140" y2="110" stroke="#7f77dd" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="gal-inner"><span class="gal-label">Klasa Informatikës</span></div>
+    </div>
+
+    <div class="gal-item" style="background:#1a2a1a;">
+      <div class="gal-geo">
+        <svg width="160" height="220" viewBox="0 0 160 220">
+          <rect x="30" y="30" width="100" height="160" rx="4" stroke="#97c459" stroke-width="1" fill="none" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="gal-inner"><span class="gal-label">Festivali Kulturor</span></div>
+    </div>
+
+    <!-- ── SHTO FOTO TË RE — kopjo bllokun më poshtë ──
+    <div class="gal-item" style="background:#NGJYRA;">
+      <div class="gal-geo">
+        ... SVG dekorativ opsional ...
+      </div>
+      <div class="gal-inner"><span class="gal-label">Etiketa e Re</span></div>
+    </div>
+    ── -->
+
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/kontakti.html
+   Ndrysho adresën, telefonin dhe emailin këtu
+   ============================================= -->
+
+<section id="kontakti">
+  <div class="section-label">Na Kontaktoni</div>
+  <h2 class="section-title">Jemi Këtu<br>për Ju</h2>
+
+  <div class="kontakti-grid">
+
+    <!-- ── INFORMACIONI I KONTAKTIT — ndrysho të dhënat ── -->
+    <div class="contact-info">
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <h4>Adresa</h4>
+          <p>Rruga "Kongresi i Dibrës"<br>Peshkopi, Shqipëri</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+        </div>
+        <div>
+          <h4>Telefon</h4>
+          <p>+355 4 222 3456<br>+355 4 222 3457</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <h4>Email</h4>
+          <p>snajdeni@yahoo.com<br>shefkicorja@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <h4>Orari i Sekretarisë</h4>
+          <p>E Hënë — E Premte<br>08:00 — 16:00</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── FORMULARI I KONTAKTIT ── -->
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Emri</label>
+          <input type="text" placeholder="Emri juaj">
+        </div>
+        <div class="form-group">
+          <label>Mbiemri</label>
+          <input type="text" placeholder="Mbiemri juaj">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="email@shembull.al">
+      </div>
+      <div class="form-group">
+        <label>Tema</label>
+        <select>
+          <option value="">Zgjidhni temën...</option>
+          <option>Informacion mbi regjistrimin</option>
+          <option>Pyetje akademike</option>
+          <option>Bashkëpunim institucional</option>
+          <option>Tjetër</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mesazhi</label>
+        <textarea rows="4" placeholder="Shkruani mesazhin tuaj..."></textarea>
+      </div>
+      <button type="submit" class="btn-gold">Dërgo Mesazhin</button>
+      <div id="form-msg" style="font-size:13px;color:#9FE1CB;display:none;margin-top:4px;">
+        Mesazhi u dërgua me sukses!
+      </div>
+    </form>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+   sections/footer.html
+   Ndrysho lidhjet dhe informacionin e footer-it
+   ============================================= -->
+
+<footer>
+  <div class="footer-top">
+
+    <div class="footer-brand">
+      <div class="logo">Said Najdeni</div>
+      <p>Gjimnaz publik në Peshkopi me mbi 60 vjet tradita arsimore.
+         Formojmë mendjet dhe karakteret e të rinjve shqiptarë.</p>
+    </div>
+
+    <!-- ── KOLONA 1 — Lidhjet kryesore ── -->
+    <div class="footer-col">
+      <h5>Lidhjet</h5>
+      <a href="#lajmet">Lajme</a>
+      <a href="#rreth">Rreth Nesh</a>
+      <a href="#drejtimet">Drejtimet</a>
+      <a href="#orari">Orari Mësimor</a>
+      <a href="#mesuesit">Mësuesit</a>
+      <a href="#galeria">Galeria</a>
+    </div>
+
+    <!-- ── KOLONA 2 — Informacion ── -->
+    <div class="footer-col">
+      <h5>Informacion</h5>
+      <a href="#">Regjistrimi</a>
+      <a href="#">Orari Mësimor</a>
+      <a href="#">Rregullorja</a>
+      <a href="#">Rezultatet</a>
+      <a href="#">Bursa</a>
+    </div>
+
+    <!-- ── KOLONA 3 — Kontakt ── -->
+    <div class="footer-col">
+      <h5>Kontakt</h5>
+      <a href="tel:+355422234556">+355 4 222 3456</a>
+      <a href="mailto:snajdeni@yahoo.com">info@snajdeni@yahoo.com</a>
+      <a href="#">Peshkopi, Shqipëri</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Gjimnazi "Said Najdeni". Të gjitha të drejtat e rezervuara.</p>
+    <p>Ndërtuar nga nxënësit &mdash; Projekt Informatike</p>
+  </div>
+</footer>
+
+
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
