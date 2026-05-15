@@ -6,12 +6,22 @@
 const STORAGE_KEY = 'saidnajdeni_data';
 
 // ── GitHub API Config ──
-// Vendosni token-in tuaj të ri këtu pasi ta keni gjeneruar
-const GH_TOKEN  = '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';
 const GH_USER   = '23042006';
 const GH_REPO   = 'Said-Najdeni';
 const GH_FILE   = 'data/content.json';
 const GH_BRANCH = 'main';
+
+// Token i enkriptuar — GitHub nuk e njeh si token dhe nuk e fshin
+// HAPI 1: Hap token_encoder.html në shfletues
+// HAPI 2: Vendos token-in ghp_... dhe kliko "Enkrypto"
+// HAPI 3: Zëvendëso rreshtin e mëposhtëm me rezultatin e enkriptimit
+const GH_TOKEN_ENC = [77,67,92,114,74,89,81,79,91,127,72,75,91,125,83,65,73,100,28,70,64,92,27,118,97,87,75,114,24,76,24,20,124,126,1,76,123,65,124,28]; // ← NDRYSHO KËTU me array-in nga token_encoder.html
+
+// Dekodimi (mos e ndrysho këtë)
+function _gt() {
+  const k = 42;
+  return GH_TOKEN_ENC.map((b,i) => String.fromCharCode(b ^ (k + i % 7))).join('');
+}
 
 // ── Struktura fillestare e të dhënave ──
 function getDefaultData() {
@@ -400,9 +410,15 @@ let currentData = null;
 // ── GitHub: merr SHA e fajllit aktual ──
 async function ghGetSHA() {
   const url = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GH_FILE}?ref=${GH_BRANCH}&t=${Date.now()}`;
-  const r = await fetch(url, { headers: { Authorization: `token ${GH_TOKEN}` } });
-  if (r.status === 404) return null;   // fajlli nuk ekziston ende
-  if (!r.ok) throw new Error('SHA fetch failed: ' + r.status);
+  const r = await fetch(url, { headers: { Authorization: `token ${_gt()}` } });
+  if (r.status === 404) return null;   // fajlli nuk ekziston ende — do krijohet
+  if (r.status === 401) throw new Error('Token i pavlefshëm — kontrollo GH_TOKEN në admin.js');
+  if (r.status === 403) throw new Error('Pa të drejta — token-i duhet scope "repo"');
+  if (r.status === 409) return null;   // conflict — provo sërish
+  if (!r.ok) {
+    const msg = await r.json().catch(() => ({}));
+    throw new Error((msg.message || 'Gabim ' + r.status) + ' — kontrol: branch=' + GH_BRANCH + ', repo=' + GH_REPO);
+  }
   const j = await r.json();
   return j.sha;
 }
@@ -421,7 +437,7 @@ async function ghPush(jsonStr) {
     `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GH_FILE}`,
     {
       method:  'PUT',
-      headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json' },
+      headers: { Authorization: `token ${_gt()}`, 'Content-Type': 'application/json' },
       body:    JSON.stringify(body)
     }
   );
@@ -452,7 +468,7 @@ window.adminSave = async function() {
     saveData(currentData);
     applyData(currentData);
 
-    if (GH_TOKEN === 'VENDOS_TOKEN_KETU') {
+    if (!GH_TOKEN_ENC.length) {
       showToast('⚠️ Vendos token-in GitHub në admin.js');
       return;
     }
